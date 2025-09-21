@@ -7,10 +7,14 @@ namespace ClientApplication
     public partial class ManualSend : Form
     {
         DbSendEmail dbSendEmailForm;
+        AddTemplateFrm opt;
+        Options optionsForm;
         public ManualSend()
         {
             InitializeComponent();
             dbSendEmailForm = new DbSendEmail();
+            opt = new AddTemplateFrm();
+            optionsForm = new Options();
         }
 
         private void SendBtn_Click(object sender, EventArgs e)
@@ -24,7 +28,7 @@ namespace ClientApplication
                 Name = ResiverName.Text,
                 Lname = ResiverLastName.Text,
                 Email = ResiverEmail.Text,
-                Gender = int.Parse(Gender.Text),
+                Gender = Gender.Text,
                 Company = Company.Text,
                 Subject = MailSubject.Text
             };
@@ -61,6 +65,12 @@ namespace ClientApplication
         {
             dbSendEmailForm = new DbSendEmail();
             dbSendEmailForm.Show();
+        }
+
+        private void OptionsBtn_Click(object sender, EventArgs e)
+        {
+            optionsForm = new Options();
+            optionsForm.Show();
         }
     }
 }

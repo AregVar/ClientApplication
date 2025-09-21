@@ -51,6 +51,7 @@
             MailSubjLab = new Label();
             Company = new TextBox();
             label4 = new Label();
+            OptionsBtn = new Button();
             SuspendLayout();
             // 
             // NameLeb
@@ -115,11 +116,11 @@
             // 
             GenderLab.AutoSize = true;
             GenderLab.Font = new Font("Segoe UI Emoji", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            GenderLab.Location = new Point(49, 211);
+            GenderLab.Location = new Point(76, 211);
             GenderLab.Name = "GenderLab";
-            GenderLab.Size = new Size(112, 21);
+            GenderLab.Size = new Size(61, 21);
             GenderLab.TabIndex = 6;
-            GenderLab.Text = "Gender(1 or 2)";
+            GenderLab.Text = "Gender";
             // 
             // SendBtn
             // 
@@ -255,11 +256,22 @@
             label4.TabIndex = 21;
             label4.Text = "Company";
             // 
+            // OptionsBtn
+            // 
+            OptionsBtn.Location = new Point(0, 0);
+            OptionsBtn.Name = "OptionsBtn";
+            OptionsBtn.Size = new Size(75, 34);
+            OptionsBtn.TabIndex = 22;
+            OptionsBtn.Text = "Options";
+            OptionsBtn.UseVisualStyleBackColor = true;
+            OptionsBtn.Click += OptionsBtn_Click;
+            // 
             // ManualSend
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(OptionsBtn);
             Controls.Add(Company);
             Controls.Add(label4);
             Controls.Add(MailSubject);
@@ -314,5 +326,6 @@
         private Label MailSubjLab;
         private TextBox Company;
         private Label label4;
+        private Button OptionsBtn;
     }
 }
