@@ -52,6 +52,7 @@
             Company = new TextBox();
             label4 = new Label();
             OptionsBtn = new Button();
+            OptionsAll = new Button();
             SuspendLayout();
             // 
             // NameLeb
@@ -266,11 +267,22 @@
             OptionsBtn.UseVisualStyleBackColor = true;
             OptionsBtn.Click += OptionsBtn_Click;
             // 
+            // OptionsAll
+            // 
+            OptionsAll.Location = new Point(12, 404);
+            OptionsAll.Name = "OptionsAll";
+            OptionsAll.Size = new Size(75, 34);
+            OptionsAll.TabIndex = 23;
+            OptionsAll.Text = "Options";
+            OptionsAll.UseVisualStyleBackColor = true;
+            OptionsAll.Click += OptionsAll_Click;
+            // 
             // ManualSend
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(OptionsAll);
             Controls.Add(OptionsBtn);
             Controls.Add(Company);
             Controls.Add(label4);
@@ -327,5 +339,6 @@
         private TextBox Company;
         private Label label4;
         private Button OptionsBtn;
+        private Button OptionsAll;
     }
 }

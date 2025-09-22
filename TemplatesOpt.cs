@@ -33,6 +33,8 @@ namespace ClientApplication
             GetData();
         }
 
+
+
         private async void GetData()
         {
             try
@@ -62,9 +64,9 @@ namespace ClientApplication
 
         private void DataSync()
         {
-            string sourcePath = "templates.db";
+            string sourcePath = "options.db";
             string path = (optionsForm.GetRestClientPath()).Substring(0, (optionsForm.GetRestClientPath()).IndexOf("\\bin"));
-            string targetPath = Path.Combine(path, "templates.db");
+            string targetPath = Path.Combine(path, "options.db");
 
             using var sourceConn = new SqliteConnection($"Data Source={sourcePath}");
             using var targetConn = new SqliteConnection($"Data Source={targetPath}");

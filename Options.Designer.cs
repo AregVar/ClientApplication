@@ -56,7 +56,7 @@
             // 
             // TemplateBtn
             // 
-            TemplateBtn.Location = new Point(107, 266);
+            TemplateBtn.Location = new Point(107, 258);
             TemplateBtn.Name = "TemplateBtn";
             TemplateBtn.Size = new Size(119, 33);
             TemplateBtn.TabIndex = 2;

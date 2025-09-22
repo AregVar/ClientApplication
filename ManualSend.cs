@@ -9,6 +9,7 @@ namespace ClientApplication
         DbSendEmail dbSendEmailForm;
         AddTemplateFrm opt;
         Options optionsForm;
+        AllOptions optAll;
         public ManualSend()
         {
             InitializeComponent();
@@ -71,6 +72,12 @@ namespace ClientApplication
         {
             optionsForm = new Options();
             optionsForm.Show();
+        }
+
+        private void OptionsAll_Click(object sender, EventArgs e)
+        {
+             optAll = new AllOptions();
+             optAll.Show();
         }
     }
 }
