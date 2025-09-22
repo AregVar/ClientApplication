@@ -14,6 +14,7 @@ namespace ClientApplication
     public partial class AllOptions : Form
     {
         TemplateOptions optForm = new TemplateOptions();
+        SMTPOptions smtpForm = new SMTPOptions();
         private static Process? _serviceProcess;
         string pathToExe = string.Empty;
 
@@ -38,9 +39,15 @@ namespace ClientApplication
             optForm.TopLevel = false;
             optForm.FormBorderStyle = FormBorderStyle.None;
             optForm.Dock = DockStyle.Fill;
+            smtpForm.TopLevel = false;
+            smtpForm.FormBorderStyle = FormBorderStyle.None;
+            smtpForm.Dock = DockStyle.Fill;
 
             tabPage1.Controls.Add(optForm);
             optForm.Show();
+            tabPage2.Controls.Add(smtpForm);
+            smtpForm.Show();
+
         }
 
         private void tabPage1_Click(object sender, EventArgs e)
