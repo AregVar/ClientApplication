@@ -35,6 +35,8 @@
             UpdBtn = new Button();
             label3 = new Label();
             TemplateId = new TextBox();
+            webView21 = new Microsoft.Web.WebView2.WinForms.WebView2();
+            ((System.ComponentModel.ISupportInitialize)webView21).BeginInit();
             SuspendLayout();
             // 
             // label2
@@ -96,11 +98,24 @@
             TemplateId.Size = new Size(100, 23);
             TemplateId.TabIndex = 12;
             // 
+            // webView21
+            // 
+            webView21.AllowExternalDrop = true;
+            webView21.CreationProperties = null;
+            webView21.DefaultBackgroundColor = Color.White;
+            webView21.Location = new Point(792, 15);
+            webView21.Name = "webView21";
+            webView21.Size = new Size(449, 423);
+            webView21.TabIndex = 14;
+            webView21.ZoomFactor = 1D;
+            webView21.Click += webView21_Click;
+            // 
             // EditFrm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1253, 450);
+            Controls.Add(webView21);
             Controls.Add(label3);
             Controls.Add(TemplateId);
             Controls.Add(label2);
@@ -111,6 +126,7 @@
             Name = "EditFrm";
             Text = "Edit Tempate";
             Load += EditFrm_Load;
+            ((System.ComponentModel.ISupportInitialize)webView21).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -124,5 +140,6 @@
         private Button UpdBtn;
         private Label label3;
         private TextBox TemplateId;
+        private Microsoft.Web.WebView2.WinForms.WebView2 webView21;
     }
 }

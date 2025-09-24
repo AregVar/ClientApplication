@@ -33,6 +33,8 @@
             TemplateName = new TextBox();
             label1 = new Label();
             label2 = new Label();
+            webView21 = new Microsoft.Web.WebView2.WinForms.WebView2();
+            ((System.ComponentModel.ISupportInitialize)webView21).BeginInit();
             SuspendLayout();
             // 
             // AddBtn
@@ -52,6 +54,7 @@
             TemplateBody.Size = new Size(734, 219);
             TemplateBody.TabIndex = 2;
             TemplateBody.Text = "";
+            TemplateBody.TextChanged += TemplateBody_TextChanged;
             // 
             // TemplateName
             // 
@@ -78,11 +81,23 @@
             label2.TabIndex = 6;
             label2.Text = "Template body";
             // 
+            // webView21
+            // 
+            webView21.AllowExternalDrop = true;
+            webView21.CreationProperties = null;
+            webView21.DefaultBackgroundColor = Color.White;
+            webView21.Location = new Point(779, 13);
+            webView21.Name = "webView21";
+            webView21.Size = new Size(401, 398);
+            webView21.TabIndex = 15;
+            webView21.ZoomFactor = 1D;
+            // 
             // AddTemplateFrm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1192, 450);
+            Controls.Add(webView21);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(TemplateName);
@@ -90,6 +105,7 @@
             Controls.Add(AddBtn);
             Name = "AddTemplateFrm";
             Text = "Add Template";
+            ((System.ComponentModel.ISupportInitialize)webView21).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -101,5 +117,6 @@
         private TextBox TemplateName;
         private Label label1;
         private Label label2;
+        private Microsoft.Web.WebView2.WinForms.WebView2 webView21;
     }
 }

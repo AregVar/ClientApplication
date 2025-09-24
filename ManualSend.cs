@@ -7,15 +7,15 @@ namespace ClientApplication
     public partial class ManualSend : Form
     {
         DbSendEmail dbSendEmailForm;
-        AddTemplateFrm opt;
-        Options optionsForm;
-        AllOptions optAll;
+        //AddTemplateFrm opt;
+        //Options optionsForm;
+        //AllOptions optAll;
         public ManualSend()
         {
             InitializeComponent();
             dbSendEmailForm = new DbSendEmail();
-            opt = new AddTemplateFrm();
-            optionsForm = new Options();
+            //opt = new AddTemplateFrm();
+            //optionsForm = new Options();
         }
 
         private void SendBtn_Click(object sender, EventArgs e)
@@ -41,7 +41,7 @@ namespace ClientApplication
             {
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                var response = client.PostAsync("https://localhost:7038/api/manualsender", content).Result;
+                var response = client.PostAsync("http://localhost:7038/api/manualsender", content).Result;
 
                 //if (response.IsSuccessStatusCode)
                 //{
@@ -68,16 +68,21 @@ namespace ClientApplication
             dbSendEmailForm.Show();
         }
 
-        private void OptionsBtn_Click(object sender, EventArgs e)
-        {
-            optionsForm = new Options();
-            optionsForm.Show();
-        }
+        //private void OptionsBtn_Click(object sender, EventArgs e)
+        //{
+        //    optionsForm = new Options();
+        //    optionsForm.Show();
+        //}
 
-        private void OptionsAll_Click(object sender, EventArgs e)
+        //private void OptionsAll_Click(object sender, EventArgs e)
+        //{
+        //    optAll = new AllOptions();
+        //    optAll.Show();
+        //}
+
+        private void ManualSend_Load(object sender, EventArgs e)
         {
-             optAll = new AllOptions();
-             optAll.Show();
+
         }
     }
 }

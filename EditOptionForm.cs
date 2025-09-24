@@ -49,7 +49,7 @@ namespace ClientApplication
                 var json = JsonSerializer.Serialize(option);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                var res = await _httpClient.PutAsync($"https://localhost:7038/api/templates/", content);
+                var res = await _httpClient.PutAsync($"http://localhost:7038/api/templates/", content);
                 MessageBox.Show($"Update of the option successfull");
 
                 OptionValue = OptValue.Text;

@@ -51,8 +51,6 @@
             MailSubjLab = new Label();
             Company = new TextBox();
             label4 = new Label();
-            OptionsBtn = new Button();
-            OptionsAll = new Button();
             SuspendLayout();
             // 
             // NameLeb
@@ -215,7 +213,7 @@
             // button1
             // 
             button1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            button1.Location = new Point(664, 0);
+            button1.Location = new Point(603, 1);
             button1.Name = "button1";
             button1.Size = new Size(136, 34);
             button1.TabIndex = 11;
@@ -257,33 +255,11 @@
             label4.TabIndex = 21;
             label4.Text = "Company";
             // 
-            // OptionsBtn
-            // 
-            OptionsBtn.Location = new Point(0, 0);
-            OptionsBtn.Name = "OptionsBtn";
-            OptionsBtn.Size = new Size(75, 34);
-            OptionsBtn.TabIndex = 22;
-            OptionsBtn.Text = "Options";
-            OptionsBtn.UseVisualStyleBackColor = true;
-            OptionsBtn.Click += OptionsBtn_Click;
-            // 
-            // OptionsAll
-            // 
-            OptionsAll.Location = new Point(12, 404);
-            OptionsAll.Name = "OptionsAll";
-            OptionsAll.Size = new Size(75, 34);
-            OptionsAll.TabIndex = 23;
-            OptionsAll.Text = "Options";
-            OptionsAll.UseVisualStyleBackColor = true;
-            OptionsAll.Click += OptionsAll_Click;
-            // 
             // ManualSend
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(OptionsAll);
-            Controls.Add(OptionsBtn);
             Controls.Add(Company);
             Controls.Add(label4);
             Controls.Add(MailSubject);
@@ -309,6 +285,7 @@
             Controls.Add(NameLeb);
             Name = "ManualSend";
             Text = "Send an email to a person";
+            Load += ManualSend_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -338,7 +315,5 @@
         private Label MailSubjLab;
         private TextBox Company;
         private Label label4;
-        private Button OptionsBtn;
-        private Button OptionsAll;
     }
 }

@@ -32,11 +32,12 @@
             tabPage1 = new TabPage();
             tabPage2 = new TabPage();
             tabPage3 = new TabPage();
+            label2 = new Label();
+            label1 = new Label();
             StopBtn = new Button();
             StartBtn = new Button();
             ChangePath = new Button();
-            label1 = new Label();
-            label2 = new Label();
+            tabPage4 = new TabPage();
             OptionsTab.SuspendLayout();
             tabPage3.SuspendLayout();
             SuspendLayout();
@@ -46,6 +47,7 @@
             OptionsTab.Controls.Add(tabPage1);
             OptionsTab.Controls.Add(tabPage2);
             OptionsTab.Controls.Add(tabPage3);
+            OptionsTab.Controls.Add(tabPage4);
             OptionsTab.Location = new Point(12, 12);
             OptionsTab.Name = "OptionsTab";
             OptionsTab.SelectedIndex = 0;
@@ -88,6 +90,25 @@
             tabPage3.Text = "tabPage3";
             tabPage3.UseVisualStyleBackColor = true;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(172, 127);
+            label2.Name = "label2";
+            label2.Size = new Size(156, 15);
+            label2.TabIndex = 8;
+            label2.Text = "Start/Stop RestClient Service";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(172, 41);
+            label1.Name = "label1";
+            label1.Size = new Size(216, 15);
+            label1.TabIndex = 7;
+            label1.Text = "Change or set path of RestClient service";
+            label1.Visible = false;
+            // 
             // StopBtn
             // 
             StopBtn.Location = new Point(25, 147);
@@ -116,25 +137,18 @@
             ChangePath.TabIndex = 4;
             ChangePath.Text = "Change/Set path";
             ChangePath.UseVisualStyleBackColor = true;
+            ChangePath.Visible = false;
             ChangePath.Click += ChangePath_Click;
             // 
-            // label1
+            // tabPage4
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(172, 41);
-            label1.Name = "label1";
-            label1.Size = new Size(216, 15);
-            label1.TabIndex = 7;
-            label1.Text = "Change or set path of RestClient service";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(172, 127);
-            label2.Name = "label2";
-            label2.Size = new Size(156, 15);
-            label2.TabIndex = 8;
-            label2.Text = "Start/Stop RestClient Service";
+            tabPage4.Location = new Point(4, 24);
+            tabPage4.Name = "tabPage4";
+            tabPage4.Padding = new Padding(3);
+            tabPage4.Size = new Size(538, 398);
+            tabPage4.TabIndex = 3;
+            tabPage4.Text = "tabPage4";
+            tabPage4.UseVisualStyleBackColor = true;
             // 
             // AllOptions
             // 
@@ -161,5 +175,6 @@
         private Button StopBtn;
         private Label label2;
         private Label label1;
+        private TabPage tabPage4;
     }
 }

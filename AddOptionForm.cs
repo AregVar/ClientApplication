@@ -42,7 +42,7 @@ namespace ClientApplication
                 {
                     var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                    var response = client.PostAsync("https://localhost:7038/api/options", content).Result;
+                    var response = client.PostAsync("http://localhost:7038/api/options", content).Result;
                     //EmailSend.TemplateAdd(name, body);
                     MessageBox.Show("Option added successfully.");
                 }

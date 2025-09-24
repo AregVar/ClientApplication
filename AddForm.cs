@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WriteEmail;
 
+
 namespace ClientApplication
 {
     public partial class AddTemplateFrm : Form
@@ -16,6 +17,7 @@ namespace ClientApplication
         public AddTemplateFrm()
         {
             InitializeComponent();
+            TemplateBody.TextChanged += TemplateBody_TextChanged;
         }
 
         private void AddBtn_Click(object sender, EventArgs e)
@@ -34,14 +36,14 @@ namespace ClientApplication
                     Name = name,
                     Body = body
                 };
-                
+
                 var json = System.Text.Json.JsonSerializer.Serialize(req);
                 var client = new HttpClient();
                 try
                 {
                     var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                    var response = client.PostAsync("https://localhost:7038/api/templates", content).Result;
+                    var response = client.PostAsync("http://localhost:7038/api/templates", content).Result;
                     //EmailSend.TemplateAdd(name, body);
                     MessageBox.Show("Template added/updated successfully.");
                 }
@@ -54,6 +56,12 @@ namespace ClientApplication
                     client.Dispose();
                 }
             }
+        }
+
+        private async void TemplateBody_TextChanged(object sender, EventArgs e)
+        {
+            await webView21.EnsureCoreWebView2Async();
+            webView21.NavigateToString(TemplateBody.Text);
         }
     }
 }

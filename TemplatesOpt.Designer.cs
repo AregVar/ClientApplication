@@ -34,11 +34,6 @@
             DeleteBtn = new Button();
             AddBtn = new Button();
             RefreshBtn = new Button();
-            button1 = new Button();
-            label2 = new Label();
-            label3 = new Label();
-            label4 = new Label();
-            button2 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -100,63 +95,11 @@
             RefreshBtn.UseVisualStyleBackColor = true;
             RefreshBtn.Click += RefreshBtn_Click;
             // 
-            // button1
-            // 
-            button1.Location = new Point(635, 28);
-            button1.Name = "button1";
-            button1.Size = new Size(116, 41);
-            button1.TabIndex = 6;
-            button1.Text = "Sync Data to db";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(630, 72);
-            label2.Name = "label2";
-            label2.Size = new Size(142, 15);
-            label2.TabIndex = 7;
-            label2.Text = "Please sync data if service";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(635, 87);
-            label3.Name = "label3";
-            label3.Size = new Size(134, 15);
-            label3.TabIndex = 8;
-            label3.Text = "was turned on from app";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(515, 2);
-            label4.Name = "label4";
-            label4.Size = new Size(254, 15);
-            label4.TabIndex = 9;
-            label4.Text = "Sync data from the db of app and db of service";
-            // 
-            // button2
-            // 
-            button2.Location = new Point(635, 131);
-            button2.Name = "button2";
-            button2.Size = new Size(116, 41);
-            button2.TabIndex = 10;
-            button2.Text = "Sync Data from db";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
-            // 
             // TemplateOptions
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(button2);
-            Controls.Add(label4);
-            Controls.Add(label3);
-            Controls.Add(label2);
-            Controls.Add(button1);
             Controls.Add(RefreshBtn);
             Controls.Add(AddBtn);
             Controls.Add(DeleteBtn);
@@ -179,10 +122,5 @@
         private Button DeleteBtn;
         private Button AddBtn;
         private Button RefreshBtn;
-        private Button button1;
-        private Label label2;
-        private Label label3;
-        private Label label4;
-        private Button button2;
     }
 }

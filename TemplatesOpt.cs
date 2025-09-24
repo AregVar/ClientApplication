@@ -30,8 +30,8 @@ namespace ClientApplication
 
         private async void TemplateOptions_Load(object sender, EventArgs e)
         {
-            await Task.Delay(20000);
-            GetData();
+            //await Task.Delay(20000);
+            //GetData();
         }
 
 
@@ -40,7 +40,7 @@ namespace ClientApplication
         {
             try
             {
-                var res = await _httpClient.GetAsync("https://localhost:7038/api/templates");
+                var res = await _httpClient.GetAsync("http://localhost:7038/api/templates");
                 res.EnsureSuccessStatusCode();
 
                 var json = await res.Content.ReadAsStringAsync();
@@ -63,91 +63,91 @@ namespace ClientApplication
             public string Body { get; set; }
         }
 
-        private void DataSync()
-        {
-            string sourcePath = "options.db";
-            string path = (optionsForm.GetRestClientPath()).Substring(0, (optionsForm.GetRestClientPath()).IndexOf("\\bin"));
-            string targetPath = Path.Combine(path, "options.db");
+        //private void DataSync()
+        //{
+        //    string sourcePath = "options.db";
+        //    string path = (optionsForm.GetRestClientPath()).Substring(0, (optionsForm.GetRestClientPath()).IndexOf("\\bin"));
+        //    string targetPath = Path.Combine(path, "options.db");
 
-            using var sourceConn = new SqliteConnection($"Data Source={sourcePath}");
-            using var targetConn = new SqliteConnection($"Data Source={targetPath}");
+        //    using var sourceConn = new SqliteConnection($"Data Source={sourcePath}");
+        //    using var targetConn = new SqliteConnection($"Data Source={targetPath}");
 
-            sourceConn.Open();
-            targetConn.Open();
+        //    sourceConn.Open();
+        //    targetConn.Open();
 
-            string tableName = "Templates";
-
-
-
-            var clearCmd = targetConn.CreateCommand();
-            clearCmd.CommandText = $"DELETE FROM {tableName}";
-            int deleted = clearCmd.ExecuteNonQuery();
+        //    string tableName = "Templates";
 
 
 
-            var selectCmd = sourceConn.CreateCommand();
-            selectCmd.CommandText = $"SELECT Id, Name, Body FROM {tableName}";
-
-            using var reader = selectCmd.ExecuteReader();
-
-            while (reader.Read())
-            {
-                int id = reader.GetInt32(0);
-                string name = reader.GetString(1);
-                string body = reader.GetString(2);
-
-                var insertCmd = targetConn.CreateCommand();
-                insertCmd.CommandText = $"INSERT INTO {tableName} (Id, Name, Body) VALUES (@id, @name, @body)";
-                insertCmd.Parameters.AddWithValue("@id", id);
-                insertCmd.Parameters.AddWithValue("@name", name);
-                insertCmd.Parameters.AddWithValue("@body", body);
-                insertCmd.ExecuteNonQuery();
-            }
-
-        }
-
-        private void DataSyncDbToApp()
-        {
-            string sourcePath = "options.db";
-            string path = (optionsForm.GetRestClientPath()).Substring(0, (optionsForm.GetRestClientPath()).IndexOf("\\bin"));
-            string targetPath = Path.Combine(path, "options.db");
-
-            using var sourceConn = new SqliteConnection($"Data Source={sourcePath}");
-            using var targetConn = new SqliteConnection($"Data Source={targetPath}");
-
-            sourceConn.Open();
-            targetConn.Open();
-
-            string tableName = "Templates";
+        //    var clearCmd = targetConn.CreateCommand();
+        //    clearCmd.CommandText = $"DELETE FROM {tableName}";
+        //    int deleted = clearCmd.ExecuteNonQuery();
 
 
 
-            var clearCmd = sourceConn.CreateCommand();
-            clearCmd.CommandText = $"DELETE FROM {tableName}";
-            int deleted = clearCmd.ExecuteNonQuery();
+        //    var selectCmd = sourceConn.CreateCommand();
+        //    selectCmd.CommandText = $"SELECT Id, Name, Body FROM {tableName}";
+
+        //    using var reader = selectCmd.ExecuteReader();
+
+        //    while (reader.Read())
+        //    {
+        //        int id = reader.GetInt32(0);
+        //        string name = reader.GetString(1);
+        //        string body = reader.GetString(2);
+
+        //        var insertCmd = targetConn.CreateCommand();
+        //        insertCmd.CommandText = $"INSERT INTO {tableName} (Id, Name, Body) VALUES (@id, @name, @body)";
+        //        insertCmd.Parameters.AddWithValue("@id", id);
+        //        insertCmd.Parameters.AddWithValue("@name", name);
+        //        insertCmd.Parameters.AddWithValue("@body", body);
+        //        insertCmd.ExecuteNonQuery();
+        //    }
+
+        //}
+
+        //private void DataSyncDbToApp()
+        //{
+        //    string sourcePath = "options.db";
+        //    string path = (optionsForm.GetRestClientPath()).Substring(0, (optionsForm.GetRestClientPath()).IndexOf("\\bin"));
+        //    string targetPath = Path.Combine(path, "options.db");
+
+        //    using var sourceConn = new SqliteConnection($"Data Source={sourcePath}");
+        //    using var targetConn = new SqliteConnection($"Data Source={targetPath}");
+
+        //    sourceConn.Open();
+        //    targetConn.Open();
+
+        //    string tableName = "Templates";
 
 
 
-            var selectCmd = targetConn.CreateCommand();
-            selectCmd.CommandText = $"SELECT Id, Name, Body FROM {tableName}";
+        //    var clearCmd = sourceConn.CreateCommand();
+        //    clearCmd.CommandText = $"DELETE FROM {tableName}";
+        //    int deleted = clearCmd.ExecuteNonQuery();
 
-            using var reader = selectCmd.ExecuteReader();
 
-            while (reader.Read())
-            {
-                int id = reader.GetInt32(0);
-                string name = reader.GetString(1);
-                string body = reader.GetString(2);
 
-                var insertCmd = sourceConn.CreateCommand();
-                insertCmd.CommandText = $"INSERT INTO {tableName} (Id, Name, Body) VALUES (@id, @name, @body)";
-                insertCmd.Parameters.AddWithValue("@id", id);
-                insertCmd.Parameters.AddWithValue("@name", name);
-                insertCmd.Parameters.AddWithValue("@body", body);
-                insertCmd.ExecuteNonQuery();
-            }
+        //    var selectCmd = targetConn.CreateCommand();
+        //    selectCmd.CommandText = $"SELECT Id, Name, Body FROM {tableName}";
 
-        }
+        //    using var reader = selectCmd.ExecuteReader();
+
+        //    while (reader.Read())
+        //    {
+        //        int id = reader.GetInt32(0);
+        //        string name = reader.GetString(1);
+        //        string body = reader.GetString(2);
+
+        //        var insertCmd = sourceConn.CreateCommand();
+        //        insertCmd.CommandText = $"INSERT INTO {tableName} (Id, Name, Body) VALUES (@id, @name, @body)";
+        //        insertCmd.Parameters.AddWithValue("@id", id);
+        //        insertCmd.Parameters.AddWithValue("@name", name);
+        //        insertCmd.Parameters.AddWithValue("@body", body);
+        //        insertCmd.ExecuteNonQuery();
+        //    }
+
+        //}
 
         private async void RefreshBtn_Click(object sender, EventArgs e)
         {
@@ -175,7 +175,7 @@ namespace ClientApplication
 
                 try
                 {
-                    var res = await _httpClient.DeleteAsync($"https://localhost:7038/api/templates/{dataGridView1.CurrentRow.Cells["Id"].Value}");
+                    var res = await _httpClient.DeleteAsync($"http://localhost:7038/api/templates/{dataGridView1.CurrentRow.Cells["Id"].Value}");
                     GetData();
                     MessageBox.Show($"Deletion of the template successfull");
                 }
@@ -208,25 +208,25 @@ namespace ClientApplication
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            var confirm = MessageBox.Show($"You are about to syncronise templates data from app to db. That means data from service db will be replaced.\nAre you sure?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (confirm == DialogResult.No)
-            {
-                return;
-            }
-            DataSync();
-        }
+        //private void button1_Click(object sender, EventArgs e)
+        //{
+        //    var confirm = MessageBox.Show($"You are about to syncronise templates data from app to db. That means data from service db will be replaced.\nAre you sure?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+        //    if (confirm == DialogResult.No)
+        //    {
+        //        return;
+        //    }
+        //    DataSync();
+        //}
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            var confirm = MessageBox.Show($"You are about to syncronise templates data from db to app. That means data from application db will be replaced.\nAre you sure?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (confirm == DialogResult.No)
-            {
-                return;
-            }
+        //private void button2_Click(object sender, EventArgs e)
+        //{
+        //    var confirm = MessageBox.Show($"You are about to syncronise templates data from db to app. That means data from application db will be replaced.\nAre you sure?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+        //    if (confirm == DialogResult.No)
+        //    {
+        //        return;
+        //    }
 
-            DataSyncDbToApp();
-        }
+        //    DataSyncDbToApp();
+        //}
     }
 }

@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
+using Microsoft.Web.WebView2.WinForms;
 
 namespace ClientApplication
 {
@@ -26,6 +27,8 @@ namespace ClientApplication
             Name = name;
             Body = body;
             Id = id;
+
+            TemplateBody.TextChanged += TemplateBody_TextChanged;
         }
 
         private void EditFrm_Load(object sender, EventArgs e)
@@ -38,8 +41,8 @@ namespace ClientApplication
 
         private async void UpdBtn_Click(object sender, EventArgs e)
         {
-            
-            
+
+
             if (TemplateName.Text == Name && TemplateBody.Text == Body)
             {
                 MessageBox.Show("No changes detected.");
@@ -58,7 +61,7 @@ namespace ClientApplication
                 var json = JsonSerializer.Serialize(template);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                var res = await _httpClient.PutAsync($"https://localhost:7038/api/templates/{Id}", content);
+                var res = await _httpClient.PutAsync($"http://localhost:7038/api/templates/{Id}", content);
                 MessageBox.Show($"Update of the template successfull");
 
                 Name = TemplateName.Text;
@@ -74,6 +77,17 @@ namespace ClientApplication
         {
             public string? Name { get; set; }
             public string? Body { get; set; }
+        }
+
+        private void webView21_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private async void TemplateBody_TextChanged(object sender, EventArgs e)
+        {
+            await webView21.EnsureCoreWebView2Async();
+            webView21.NavigateToString(TemplateBody.Text);
         }
     }
 }

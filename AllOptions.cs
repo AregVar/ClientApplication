@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.ServiceProcess;
 
 namespace ClientApplication
 {
@@ -17,11 +18,19 @@ namespace ClientApplication
         SMTPOptions smtpForm = new SMTPOptions();
         private static Process? _serviceProcess;
         string pathToExe = string.Empty;
+        ManualSend manualSendForm = new ManualSend();
+        ServiceController sc = new ServiceController("RestClientTest");
 
         public AllOptions()
         {
             InitializeComponent();
-            if (_serviceProcess == null || _serviceProcess.HasExited)
+            string serviceName = "RestClientTest";
+            bool exists = ServiceController.GetServices().Any(s => s.ServiceName == serviceName);
+            if (!exists)
+            {
+                OptionsTab.TabPages.Remove(tabPage3);
+            }
+            if (sc.Status == ServiceControllerStatus.Stopped)
             {
                 StopBtn.Enabled = false;
                 StartBtn.Enabled = true;
@@ -36,17 +45,26 @@ namespace ClientApplication
             tabPage1.Text = "Templates";
             tabPage2.Text = "Smtp Options";
             tabPage3.Text = "Service Options";
+            //OptionsTab.TabPages.Remove(tabPage3);
+            tabPage4.Text = "Sending Preview";
             optForm.TopLevel = false;
             optForm.FormBorderStyle = FormBorderStyle.None;
             optForm.Dock = DockStyle.Fill;
             smtpForm.TopLevel = false;
             smtpForm.FormBorderStyle = FormBorderStyle.None;
             smtpForm.Dock = DockStyle.Fill;
+            manualSendForm.TopLevel = false;
+            manualSendForm.FormBorderStyle = FormBorderStyle.None;
+            manualSendForm.Dock = DockStyle.Fill;
+
 
             tabPage1.Controls.Add(optForm);
             optForm.Show();
             tabPage2.Controls.Add(smtpForm);
             smtpForm.Show();
+            tabPage4.Controls.Add(manualSendForm);
+            manualSendForm.Show();
+
 
         }
 
@@ -57,16 +75,37 @@ namespace ClientApplication
 
         private void StartBtn_Click(object sender, EventArgs e)
         {
-            _serviceProcess = new Process();
-            _serviceProcess.StartInfo.FileName = GetRestClientPath();
-            _serviceProcess.StartInfo.UseShellExecute = true;
-            if (!string.IsNullOrEmpty(_serviceProcess.StartInfo.FileName))
-                _serviceProcess.Start();
-            else
-                _serviceProcess = null;
+            //_serviceProcess = new Process();
+            //_serviceProcess.StartInfo.FileName = GetRestClientPath();
+            //_serviceProcess.StartInfo.UseShellExecute = true;
+            //if (!string.IsNullOrEmpty(_serviceProcess.StartInfo.FileName))
+            //    _serviceProcess.Start();
+            //else
+            //    _serviceProcess = null;
 
+            //StopBtn.Enabled = true;
+            //StartBtn.Enabled = false;
+            
+
+            if (sc.Status == ServiceControllerStatus.Running)
+            {
+                StopBtn.Enabled = true;
+                StartBtn.Enabled = false;
+                return;
+            }
+
+
+            if (sc.Status == ServiceControllerStatus.Stopped)
+            {
+                sc.Start();
+                sc.WaitForStatus(ServiceControllerStatus.Running, TimeSpan.FromSeconds(10));
+            }
             StopBtn.Enabled = true;
             StartBtn.Enabled = false;
+
+
+
+
         }
 
         public string GetRestClientPath()
@@ -101,13 +140,22 @@ namespace ClientApplication
 
         private void StopBtn_Click(object sender, EventArgs e)
         {
-            if (_serviceProcess != null && !_serviceProcess.HasExited)
+            //if (_serviceProcess != null && !_serviceProcess.HasExited)
+            //{
+            //    _serviceProcess.Kill();
+            //    _serviceProcess = null;
+            //    StopBtn.Enabled = false;
+            //    StartBtn.Enabled = true;
+            //}
+            ServiceController sc = new ServiceController("RestClientTest");
+
+            if (sc.Status == ServiceControllerStatus.Running)
             {
-                _serviceProcess.Kill();
-                _serviceProcess = null;
-                StopBtn.Enabled = false;
-                StartBtn.Enabled = true;
+                sc.Stop();
+                //sc.WaitForStatus(ServiceControllerStatus.Running, TimeSpan.FromSeconds(10));
             }
+            StopBtn.Enabled = false;
+            StartBtn.Enabled = true;
         }
     }
 }
