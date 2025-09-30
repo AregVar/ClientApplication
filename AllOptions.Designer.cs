@@ -38,6 +38,7 @@
             StartBtn = new Button();
             ChangePath = new Button();
             tabPage4 = new TabPage();
+            ServiceNameChange = new Button();
             OptionsTab.SuspendLayout();
             tabPage3.SuspendLayout();
             SuspendLayout();
@@ -63,7 +64,7 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "tabPage1";
             tabPage1.UseVisualStyleBackColor = true;
-            tabPage1.Click += tabPage1_Click;
+           
             // 
             // tabPage2
             // 
@@ -150,11 +151,23 @@
             tabPage4.Text = "tabPage4";
             tabPage4.UseVisualStyleBackColor = true;
             // 
+            // ServiceNameChange
+            // 
+            ServiceNameChange.FlatStyle = FlatStyle.Popup;
+            ServiceNameChange.Location = new Point(673, 12);
+            ServiceNameChange.Name = "ServiceNameChange";
+            ServiceNameChange.Size = new Size(123, 23);
+            ServiceNameChange.TabIndex = 1;
+            ServiceNameChange.Text = "Service Name";
+            ServiceNameChange.UseVisualStyleBackColor = true;
+            ServiceNameChange.Click += ServiceNameChange_Click;
+            // 
             // AllOptions
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(820, 450);
+            Controls.Add(ServiceNameChange);
             Controls.Add(OptionsTab);
             Name = "AllOptions";
             Text = "Options";
@@ -176,5 +189,6 @@
         private Label label2;
         private Label label1;
         private TabPage tabPage4;
+        private Button ServiceNameChange;
     }
 }

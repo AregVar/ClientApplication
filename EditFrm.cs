@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Web.WebView2.WinForms;
+using Microsoft.Web.WebView2.Wpf;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,7 +13,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
-using Microsoft.Web.WebView2.WinForms;
 
 namespace ClientApplication
 {
@@ -28,7 +29,10 @@ namespace ClientApplication
             Body = body;
             Id = id;
 
+
+
             TemplateBody.TextChanged += TemplateBody_TextChanged;
+            this.Resize += TemplatesForm_Resize;
         }
 
         private void EditFrm_Load(object sender, EventArgs e)
@@ -37,6 +41,10 @@ namespace ClientApplication
             TemplateBody.Text = Body;
             TemplateId.Text = Id.ToString();
             TemplateId.ReadOnly = true;
+            webView21.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            //TemplateBody.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            TemplateBody.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Bottom;
+            UpdBtn.Anchor = AnchorStyles.Top | AnchorStyles.Left;
         }
 
         private async void UpdBtn_Click(object sender, EventArgs e)
@@ -89,5 +97,27 @@ namespace ClientApplication
             await webView21.EnsureCoreWebView2Async();
             webView21.NavigateToString(TemplateBody.Text);
         }
+
+        private void TemplatesForm_Resize(object sender, EventArgs e)
+        {
+            //webView21.Left = 10;
+            //webView21.Top = 10;
+            //webView21.Width = this.ClientSize.Width - 20;
+            //webView21.Height = this.ClientSize.Height / 2 - 20;
+
+            //// RichTextBox под webView2
+            //TemplateBody.Left = 10;
+            //TemplateBody.Top = webView21.Bottom + 10;
+            //TemplateBody.Width = this.ClientSize.Width - 20;
+            //TemplateBody.Height = this.ClientSize.Height - webView21.Height - 30;
+
+            //// Меняем размер шрифта (увеличиваем на 1)
+            //if (TemplateBody.Font.Size < 30) // ограничение, чтобы не рос бесконечно
+            //{
+            //    float newSize = TemplateBody.Font.Size + 1;
+            //    TemplateBody.Font = new Font(TemplateBody.Font.FontFamily, newSize);
+            }
+        }
     }
-}
+
+

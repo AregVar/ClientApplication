@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             RefreshBtn = new Button();
-            AddBtn = new Button();
-            DeleteBtn = new Button();
             EditBtn = new Button();
             label1 = new Label();
             dataGridView1 = new DataGridView();
@@ -47,29 +45,9 @@
             RefreshBtn.UseVisualStyleBackColor = true;
             RefreshBtn.Click += RefreshBtn_Click;
             // 
-            // AddBtn
-            // 
-            AddBtn.Location = new Point(516, 358);
-            AddBtn.Name = "AddBtn";
-            AddBtn.Size = new Size(75, 23);
-            AddBtn.TabIndex = 10;
-            AddBtn.Text = "Add";
-            AddBtn.UseVisualStyleBackColor = true;
-            AddBtn.Click += AddBtn_Click;
-            // 
-            // DeleteBtn
-            // 
-            DeleteBtn.Location = new Point(404, 358);
-            DeleteBtn.Name = "DeleteBtn";
-            DeleteBtn.Size = new Size(75, 23);
-            DeleteBtn.TabIndex = 9;
-            DeleteBtn.Text = "Delete";
-            DeleteBtn.UseVisualStyleBackColor = true;
-            DeleteBtn.Click += DeleteBtn_Click;
-            // 
             // EditBtn
             // 
-            EditBtn.Location = new Point(282, 358);
+            EditBtn.Location = new Point(407, 354);
             EditBtn.Name = "EditBtn";
             EditBtn.Size = new Size(75, 23);
             EditBtn.TabIndex = 8;
@@ -101,8 +79,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(RefreshBtn);
-            Controls.Add(AddBtn);
-            Controls.Add(DeleteBtn);
             Controls.Add(EditBtn);
             Controls.Add(label1);
             Controls.Add(dataGridView1);
@@ -117,8 +93,6 @@
         #endregion
 
         private Button RefreshBtn;
-        private Button AddBtn;
-        private Button DeleteBtn;
         private Button EditBtn;
         private Label label1;
         private DataGridView dataGridView1;

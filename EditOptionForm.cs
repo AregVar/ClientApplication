@@ -24,7 +24,7 @@ namespace ClientApplication
             InitializeComponent();
             OptionName = optionName;
             OptionValue = optionValue;
-            this.Category = category;
+            Category = category;
         }
 
 
@@ -47,9 +47,10 @@ namespace ClientApplication
             {
                 var option = new Options { OptionName = this.OptName.Text, OptionValue = this.OptValue.Text, Category = this.OptCategory.Text };
                 var json = JsonSerializer.Serialize(option);
+                MessageBox.Show(json);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                var res = await _httpClient.PutAsync($"http://localhost:7038/api/templates/", content);
+                var res = await _httpClient.PutAsync($"http://localhost:7038/api/options", content);
                 MessageBox.Show($"Update of the option successfull");
 
                 OptionValue = OptValue.Text;
@@ -57,15 +58,15 @@ namespace ClientApplication
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error during the deletion of the option: {ex.Message}");
+                MessageBox.Show($"Error during the editing of the option: {ex.Message}");
             }
         }
 
         private class Options
         {
-            public string OptionName { get; set; }
-            public string OptionValue { get; set; }
-            public string Category { get; set; }
+            public string? OptionName { get; set; }
+            public string? OptionValue { get; set; }
+            public string? Category { get; set; }
         }
 
         private void EditOptionForm_Load(object sender, EventArgs e)

@@ -56,35 +56,7 @@ namespace ClientApplication
             GetData();
         }
 
-        private async void DeleteBtn_Click(object sender, EventArgs e)
-        {
-            if (dataGridView1.CurrentRow != null)
-            {
-                var confirm = MessageBox.Show($"You are about to delete the option: {dataGridView1.CurrentRow.Cells["OptionName"].Value}, are you sure?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                if (confirm == DialogResult.No)
-                {
-                    return;
-                }
-
-                try
-                {
-                    var res = await _httpClient.DeleteAsync($"http://localhost:7038/api/options/{dataGridView1.CurrentRow.Cells["OptionName"].Value}");
-                    GetData();
-                    MessageBox.Show($"Deletion of the option successfull");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Error during the option of the template: {ex.Message}");
-                }
-
-            }
-            else
-            {
-                MessageBox.Show("No row is selected");
-            }
-
-        }
+        
 
         private void EditBtn_Click(object sender, EventArgs e)
         {
@@ -102,12 +74,7 @@ namespace ClientApplication
             GetData();
         }
 
-        private void AddBtn_Click(object sender, EventArgs e)
-        {
-            addOptionForm = new AddOptionForm();
-            addOptionForm.ShowDialog();
-            GetData();
-        }
+       
 
         //private void DataSync()
         //{

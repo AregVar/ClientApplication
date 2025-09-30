@@ -82,6 +82,7 @@
             // 
             OptName.Location = new Point(56, 102);
             OptName.Name = "OptName";
+            OptName.ReadOnly = true;
             OptName.Size = new Size(100, 23);
             OptName.TabIndex = 16;
             // 
