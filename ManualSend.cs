@@ -41,7 +41,7 @@ namespace ClientApplication
             {
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                var response = client.PostAsync("http://localhost:7038/api/manualsender", content).Result;
+                var response = client.PostAsync($"{(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceHost.txt"))).Trim()}/api/manualsender", content).Result;
 
                 //if (response.IsSuccessStatusCode)
                 //{
@@ -71,7 +71,7 @@ namespace ClientApplication
             {
                 var json = "{}"; 
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
-                var response = await client.PostAsync("http://localhost:7038/api/people", content);
+                var response = await client.PostAsync($"{(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceHost.txt"))).Trim()}/api/people", content);
                 if (response.IsSuccessStatusCode)
                 {
                     MessageBox.Show("Request successful!");

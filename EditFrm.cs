@@ -69,7 +69,7 @@ namespace ClientApplication
                 var json = JsonSerializer.Serialize(template);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                var res = await _httpClient.PutAsync($"http://localhost:7038/api/templates/{Id}", content);
+                var res = await _httpClient.PutAsync($"{(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceHost.txt"))).Trim()}/api/templates/{Id}", content);
                 MessageBox.Show($"Update of the template successfull");
 
                 Name = TemplateName.Text;

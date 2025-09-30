@@ -40,7 +40,7 @@ namespace ClientApplication
         {
             try
             {
-                var res = await _httpClient.GetAsync("http://localhost:7038/api/templates");
+                var res = await _httpClient.GetAsync($"{(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceHost.txt"))).Trim()}/api/templates");
                 res.EnsureSuccessStatusCode();
 
                 var json = await res.Content.ReadAsStringAsync();
@@ -175,7 +175,7 @@ namespace ClientApplication
 
                 try
                 {
-                    var res = await _httpClient.DeleteAsync($"http://localhost:7038/api/templates/{dataGridView1.CurrentRow.Cells["Id"].Value}");
+                    var res = await _httpClient.DeleteAsync($"{(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceHost.txt"))).Trim()}/api/templates/{dataGridView1.CurrentRow.Cells["Id"].Value}");
                     GetData();
                     MessageBox.Show($"Deletion of the template successfull");
                 }

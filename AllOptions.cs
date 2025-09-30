@@ -29,13 +29,24 @@ namespace ClientApplication
             string pathConfig = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceName.txt");
             if (!File.Exists(pathConfig))
             {
-                string input = Interaction.InputBox("Please enter your rest service name", "Rest Service Name", "");
+                string input = Interaction.InputBox("Please enter your rest client service name", "Rest Service Name", "");
                 //while (string.IsNullOrWhiteSpace(input))
                 //{
                 //    input = Interaction.InputBox("Please enter your rest service name", "Rest Service Name", "");
                 //}
                 File.WriteAllText(pathConfig, input.Trim());
             }
+            string pathConfig1 = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceHost.txt");
+            if (!File.Exists(pathConfig1) || string.IsNullOrEmpty(File.ReadAllText(pathConfig1)))
+            {
+                string input = Interaction.InputBox("Please enter your rest client service name. You can't let it be empty or space.", "Rest Service Host", "");
+                while (string.IsNullOrWhiteSpace(input))
+                {
+                    input = Interaction.InputBox("Please enter your rest service name. You can't let it be empty or space.", "Rest Service Host", "");
+                }
+                File.WriteAllText(pathConfig1, input.Trim());
+            }
+
             using var reader = new StreamReader(pathConfig);
             ServiceName = reader.ReadToEnd().Trim();
             bool exists = ServiceController.GetServices().Any(s => s.ServiceName == ServiceName);
@@ -143,7 +154,7 @@ namespace ClientApplication
         private void ServiceNameChange_Click(object sender, EventArgs e)
         {
             string pathConfig = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceName.txt");
-            string input = Interaction.InputBox("Please enter your rest service name", "Rest Service Name", "");
+            string input = Interaction.InputBox("Please enter your rest client service name", "Rest Service Name", "");
             //while (string.IsNullOrWhiteSpace(input))
             //{
             //    input = Interaction.InputBox("Please enter your rest service name", "Rest Service Name", "");
@@ -159,7 +170,7 @@ namespace ClientApplication
             {
                 if (!OptionsTab.TabPages.Contains(tabPage3))
                     OptionsTab.TabPages.Insert(2, tabPage3);
-              
+
                 ServiceController sc = new ServiceController(ServiceName);
                 if (sc.Status == ServiceControllerStatus.Stopped)
                 {
@@ -171,9 +182,21 @@ namespace ClientApplication
                     StopBtn.Enabled = true;
                     StartBtn.Enabled = false;
                 }
-                
+
             }
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string pathConfig = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceHost.txt");
+            string input = Interaction.InputBox("Please enter your rest client service Host", "Rest Service Host", "");
+
+            while (string.IsNullOrWhiteSpace(input))
+            {
+                input = Interaction.InputBox("Please enter your rest service name. You can't let it be empty or space.", "Rest Service Host", "");
+            }
+            File.WriteAllText(pathConfig, input.Trim());
         }
     }
 }

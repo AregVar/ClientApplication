@@ -50,7 +50,7 @@ namespace ClientApplication
                 MessageBox.Show(json);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                var res = await _httpClient.PutAsync($"http://localhost:7038/api/options", content);
+                var res = await _httpClient.PutAsync($"{(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceHost.txt"))).Trim()}/api/options", content);
                 MessageBox.Show($"Update of the option successfull");
 
                 OptionValue = OptValue.Text;

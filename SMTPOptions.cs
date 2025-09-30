@@ -28,7 +28,8 @@ namespace ClientApplication
         {
             try
             {
-                var res = await _httpClient.GetAsync("http://localhost:7038/api/options");
+                
+                var res = await _httpClient.GetAsync($"{(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceHost.txt"))).Trim()}/api/options");
                 res.EnsureSuccessStatusCode();
 
                 var json = await res.Content.ReadAsStringAsync();
