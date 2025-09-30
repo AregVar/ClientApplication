@@ -36,7 +36,7 @@ namespace ClientApplication
 
             string json = System.Text.Json.JsonSerializer.Serialize(req);
 
-            var client = new HttpClient();
+            using var client = new HttpClient();
             try
             {
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -62,10 +62,33 @@ namespace ClientApplication
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
-            dbSendEmailForm = new DbSendEmail();
-            dbSendEmailForm.Show();
+            //dbSendEmailForm = new DbSendEmail();
+            //dbSendEmailForm.Show();
+            using var client = new HttpClient();
+            try
+            {
+                var json = "{}"; 
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await client.PostAsync("http://localhost:7038/api/people", content);
+                if (response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Request successful!");
+                }
+                else
+                {
+                    MessageBox.Show($"Error: {response.StatusCode}");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message);
+            }
+            finally
+            {
+                client.Dispose();
+            }
         }
 
         //private void OptionsBtn_Click(object sender, EventArgs e)
