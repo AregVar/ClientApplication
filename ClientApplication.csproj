@@ -14,10 +14,4 @@
     <PackageReference Include="System.ServiceProcess.ServiceController" Version="9.0.9" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="WriteEmail">
-      <HintPath>..\WriteEmail\bin\Debug\net9.0\WriteEmail.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>
