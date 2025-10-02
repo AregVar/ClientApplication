@@ -24,17 +24,21 @@ namespace ClientApplication
         {
             string name = TemplateName.Text;
             string body = TemplateBody.Text;
+            string gender = Gender.Text;
+            bool IsDefault = this.IsDef.Checked;
 
-            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(body))
+            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(body) || string.IsNullOrWhiteSpace(gender))
             {
-                MessageBox.Show("Please enter both template name and body.");
+                MessageBox.Show("Please enter template name, gender and body.");
             }
             else
             {
                 var req = new
                 {
                     Name = name,
-                    Body = body
+                    Body = body,
+                    Gender = gender,
+                    IsDefault = IsDefault
                 };
 
                 var json = System.Text.Json.JsonSerializer.Serialize(req);

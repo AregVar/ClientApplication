@@ -22,12 +22,16 @@ namespace ClientApplication
         private long Id;
         private string Name;
         private string Body;
-        public EditFrm(long id, string name, string body)
+        private string TemplGender;
+        private bool IsDefault;
+        public EditFrm(long id, string name, string body, string gedner, bool isdef)
         {
             InitializeComponent();
             Name = name;
             Body = body;
             Id = id;
+            TemplGender = gedner;
+            IsDefault = isdef;
 
 
 
@@ -41,6 +45,8 @@ namespace ClientApplication
             TemplateBody.Text = Body;
             TemplateId.Text = Id.ToString();
             TemplateId.ReadOnly = true;
+            Gender.Text = TemplGender;
+            IsDef.Checked = IsDefault;
             webView21.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             //TemplateBody.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             TemplateBody.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Bottom;
@@ -51,7 +57,7 @@ namespace ClientApplication
         {
 
 
-            if (TemplateName.Text == Name && TemplateBody.Text == Body)
+            if (TemplateName.Text == Name && TemplateBody.Text == Body && Gender.Text == TemplGender && IsDef.Checked == IsDefault)
             {
                 MessageBox.Show("No changes detected.");
                 return;
@@ -65,7 +71,7 @@ namespace ClientApplication
 
             try
             {
-                var template = new Template { Name = this.TemplateName.Text, Body = this.TemplateBody.Text };
+                var template = new Template { Name = this.TemplateName.Text, Body = this.TemplateBody.Text, Gender = this.Gender.Text, IsDefault = IsDef.Checked };
                 var json = JsonSerializer.Serialize(template);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
@@ -74,6 +80,8 @@ namespace ClientApplication
 
                 Name = TemplateName.Text;
                 Body = TemplateBody.Text;
+                TemplGender = Gender.Text;
+                IsDefault = IsDef.Checked;
             }
             catch (Exception ex)
             {
@@ -85,6 +93,8 @@ namespace ClientApplication
         {
             public string? Name { get; set; }
             public string? Body { get; set; }
+            public string? Gender { get; set; }
+            public bool IsDefault { get; set; }
         }
 
         private void webView21_Click(object sender, EventArgs e)

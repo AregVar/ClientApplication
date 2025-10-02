@@ -23,6 +23,7 @@ namespace ClientApplication
         EditFrm editForm;
         Options optionsForm = new Options();
         private readonly HttpClient _httpClient = new HttpClient();
+        private List<Template>? allTemplates = new List<Template>();
         public TemplateOptions()
         {
             InitializeComponent();
@@ -45,10 +46,26 @@ namespace ClientApplication
 
                 var json = await res.Content.ReadAsStringAsync();
 
-                var templates = JsonSerializer.Deserialize<List<Template>>(json,
+                allTemplates = JsonSerializer.Deserialize<List<Template>>(json,
                     new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
-                dataGridView1.DataSource = templates;
+                dataGridView1.DataSource = new BindingList<Template>(allTemplates);
+                dataGridView1.AllowUserToAddRows = false;
+                dataGridView1.AllowUserToDeleteRows = false;
+                dataGridView1.ReadOnly = true;
+                //genderComboBox.Items.Clear();
+                //genderComboBox.Items.Add("All");
+                foreach (var template in allTemplates)
+                {
+                    if (!genderComboBox.Items.Contains("All"))
+                        genderComboBox.Items.Add("All");
+                    if (!genderComboBox.Items.Contains(template.Gender))
+                        genderComboBox.Items.Add(template.Gender);
+                }
+                
+                genderComboBox.SelectedIndex = 0;
+
+
             }
             catch (Exception ex)
             {
@@ -56,11 +73,47 @@ namespace ClientApplication
             }
         }
 
+        //private void SortData()
+        //{
+        //    var values = dataGridView1.Rows
+        //    .Cast<DataGridViewRow>()
+        //    .Where(r => !r.IsNewRow) // пропускаем пустую последнюю строку
+        //    .Select(r => r.Cells["Gender"].Value?.ToString())
+        //    .Where(v => !string.IsNullOrEmpty(v))
+        //    .ToArray();
+
+
+        //    foreach (var val in values)
+        //    {
+        //        if (genderComboBox.SelectedIndex != 0)
+        //        {
+        //            foreach (var value in values)
+        //            {
+        //                foreach (DataGridViewRow row in dataGridView1.Rows)
+        //                {
+        //                    if (row.Cells["Gender"].Value != genderComboBox.SelectedText)
+        //                    {
+        //                        dataGridView1.Rows.Remove(row);
+        //                    }
+        //                }
+
+        //            }
+        //        }
+        //        else
+        //        {
+        //            dataGridView1.DataSource = dataGridView1.DataSource;
+        //        }
+        //    }
+        //}
+
         private class Template
         {
             public int Id { get; set; }
             public string Name { get; set; }
             public string Body { get; set; }
+
+            public string Gender { get; set; }
+            public bool IsDefault { get; set; }
         }
 
         //private void DataSync()
@@ -202,11 +255,40 @@ namespace ClientApplication
             long id = Convert.ToInt64(dataGridView1.CurrentRow.Cells["Id"].Value);
             string name = dataGridView1.CurrentRow.Cells["Name"].Value.ToString();
             string body = dataGridView1.CurrentRow.Cells["Body"].Value.ToString();
-            editForm = new EditFrm(id, name, body);
+            string gender = dataGridView1.CurrentRow.Cells["Gender"].Value.ToString();
+            bool isdef = Convert.ToBoolean(dataGridView1.CurrentRow.Cells["IsDefault"].Value);
+            editForm = new EditFrm(id, name, body, gender, isdef);
             editForm.ShowDialog();
             GetData();
 
         }
+
+        private void genderComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (genderComboBox.SelectedItem == null) return;
+
+            string selectedGender = genderComboBox.SelectedItem.ToString();
+
+            if (selectedGender == "All")
+            {
+                dataGridView1.DataSource = new BindingList<Template>(allTemplates);
+            }
+            else
+            {
+                var filtered = allTemplates
+                    .Where(t => t.Gender == selectedGender)
+                    .ToList();
+
+                dataGridView1.DataSource = new BindingList<Template>(filtered);
+                dataGridView1.AllowUserToAddRows = false;
+                dataGridView1.AllowUserToDeleteRows = false;
+                dataGridView1.ReadOnly = true;
+
+            }
+
+        }
+
+
 
         //private void button1_Click(object sender, EventArgs e)
         //{

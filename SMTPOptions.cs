@@ -22,6 +22,9 @@ namespace ClientApplication
         public SMTPOptions()
         {
             InitializeComponent();
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.ReadOnly = true;
         }
 
         private async void GetData()

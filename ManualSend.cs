@@ -1,6 +1,8 @@
 using System.Diagnostics;
 using System.Text;
+using System.Text.Json;
 using System.Xml.Linq;
+using static System.Windows.Forms.Design.AxImporter;
 
 namespace ClientApplication
 {
@@ -20,6 +22,11 @@ namespace ClientApplication
 
         private void SendBtn_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(templateComboBox.Text))
+            {
+                MessageBox.Show("Please select a template. Also do not forget to press Refresh to get genders from db. After that you can choose the templates");
+                return;
+            }
             var req = new
             {
                 SenderEmail = SendersEmail.Text,
@@ -29,7 +36,7 @@ namespace ClientApplication
                 Name = ResiverName.Text,
                 Lname = ResiverLastName.Text,
                 Email = ResiverEmail.Text,
-                Gender = Gender.Text,
+                Gender = templateComboBox.Text,
                 Company = Company.Text,
                 Subject = MailSubject.Text
             };
@@ -69,7 +76,7 @@ namespace ClientApplication
             using var client = new HttpClient();
             try
             {
-                var json = "{}"; 
+                var json = "{}";
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
                 var response = await client.PostAsync($"{(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceHost.txt"))).Trim()}/api/people", content);
                 if (response.IsSuccessStatusCode)
@@ -106,6 +113,40 @@ namespace ClientApplication
         private void ManualSend_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private async void button2_Click(object sender, EventArgs e)
+        {
+            using var client = new HttpClient();
+            var json = "{}";
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await client.PostAsync($"{(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceHost.txt"))).Trim()}/api/gender", content);
+            var gendersJson = await response.Content.ReadAsStringAsync();
+           
+
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+            genderComboBox.Items.Clear();
+            var genders = JsonSerializer.Deserialize<List<string>>(gendersJson, options);
+            genderComboBox.Items.AddRange(genders.ToArray());
+        }
+
+        private async void genderComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            templateComboBox.Items.Clear();
+            var selectedGender = genderComboBox.SelectedItem?.ToString();
+            if (string.IsNullOrEmpty(selectedGender)) return;
+
+            using var client = new HttpClient();
+            var requestJson = JsonSerializer.Serialize(new { Gender = selectedGender });
+            var content = new StringContent(requestJson, Encoding.UTF8, "application/json");
+            var response = await client.PostAsync($"{(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceHost.txt"))).Trim()}/api/gender/gettemplates", content);
+            var templatesJson = await response.Content.ReadAsStringAsync();
+            var templates = JsonSerializer.Deserialize<List<string>>(templatesJson);
+            templateComboBox.Items.AddRange(templates.ToArray());
+            templateComboBox.SelectedIndex = 0;
         }
     }
 }

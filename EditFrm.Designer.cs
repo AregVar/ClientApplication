@@ -36,6 +36,10 @@
             label3 = new Label();
             TemplateId = new TextBox();
             webView21 = new Microsoft.Web.WebView2.WinForms.WebView2();
+            Gender = new TextBox();
+            label4 = new Label();
+            label5 = new Label();
+            IsDef = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)webView21).BeginInit();
             SuspendLayout();
             // 
@@ -110,11 +114,49 @@
             webView21.ZoomFactor = 1D;
             webView21.Click += webView21_Click;
             // 
+            // Gender
+            // 
+            Gender.Location = new Point(188, 103);
+            Gender.Name = "Gender";
+            Gender.Size = new Size(100, 23);
+            Gender.TabIndex = 17;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(323, 79);
+            label4.Name = "label4";
+            label4.Size = new Size(163, 15);
+            label4.TabIndex = 21;
+            label4.Text = "Is default template for gender";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(188, 79);
+            label5.Name = "label5";
+            label5.Size = new Size(95, 15);
+            label5.TabIndex = 20;
+            label5.Text = "Template gender";
+            // 
+            // IsDef
+            // 
+            IsDef.AutoSize = true;
+            IsDef.Location = new Point(392, 107);
+            IsDef.Name = "IsDef";
+            IsDef.Size = new Size(15, 14);
+            IsDef.TabIndex = 22;
+            IsDef.UseVisualStyleBackColor = true;
+            // 
             // EditFrm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1253, 450);
+            ClientSize = new Size(1250, 450);
+            Controls.Add(IsDef);
+            Controls.Add(label4);
+            Controls.Add(label5);
+            Controls.Add(Gender);
             Controls.Add(webView21);
             Controls.Add(label3);
             Controls.Add(TemplateId);
@@ -141,5 +183,9 @@
         private Label label3;
         private TextBox TemplateId;
         private Microsoft.Web.WebView2.WinForms.WebView2 webView21;
+        private TextBox Gender;
+        private Label label4;
+        private Label label5;
+        private CheckBox IsDef;
     }
 }

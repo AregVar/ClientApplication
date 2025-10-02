@@ -34,7 +34,6 @@
             ResiverName = new TextBox();
             ResiverLastName = new TextBox();
             ResiverEmail = new TextBox();
-            Gender = new TextBox();
             GenderLab = new Label();
             SendBtn = new Button();
             SendersEmail = new TextBox();
@@ -51,13 +50,17 @@
             MailSubjLab = new Label();
             Company = new TextBox();
             label4 = new Label();
+            genderComboBox = new ComboBox();
+            templateComboBox = new ComboBox();
+            label5 = new Label();
+            button2 = new Button();
             SuspendLayout();
             // 
             // NameLeb
             // 
             NameLeb.AutoSize = true;
             NameLeb.Font = new Font("Segoe UI Emoji", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            NameLeb.Location = new Point(76, 54);
+            NameLeb.Location = new Point(77, 51);
             NameLeb.Name = "NameLeb";
             NameLeb.Size = new Size(52, 21);
             NameLeb.TabIndex = 0;
@@ -67,7 +70,7 @@
             // 
             LastNameLeb.AutoSize = true;
             LastNameLeb.Font = new Font("Segoe UI Emoji", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            LastNameLeb.Location = new Point(61, 104);
+            LastNameLeb.Location = new Point(62, 101);
             LastNameLeb.Name = "LastNameLeb";
             LastNameLeb.Size = new Size(84, 21);
             LastNameLeb.TabIndex = 1;
@@ -77,7 +80,7 @@
             // 
             ResiverLab.AutoSize = true;
             ResiverLab.Font = new Font("Segoe UI Emoji", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ResiverLab.Location = new Point(51, 154);
+            ResiverLab.Location = new Point(52, 151);
             ResiverLab.Name = "ResiverLab";
             ResiverLab.Size = new Size(110, 21);
             ResiverLab.TabIndex = 2;
@@ -85,37 +88,30 @@
             // 
             // ResiverName
             // 
-            ResiverName.Location = new Point(167, 56);
+            ResiverName.Location = new Point(168, 53);
             ResiverName.Name = "ResiverName";
             ResiverName.Size = new Size(175, 23);
             ResiverName.TabIndex = 0;
             // 
             // ResiverLastName
             // 
-            ResiverLastName.Location = new Point(167, 106);
+            ResiverLastName.Location = new Point(168, 103);
             ResiverLastName.Name = "ResiverLastName";
             ResiverLastName.Size = new Size(175, 23);
             ResiverLastName.TabIndex = 1;
             // 
             // ResiverEmail
             // 
-            ResiverEmail.Location = new Point(167, 154);
+            ResiverEmail.Location = new Point(168, 151);
             ResiverEmail.Name = "ResiverEmail";
             ResiverEmail.Size = new Size(175, 23);
             ResiverEmail.TabIndex = 2;
-            // 
-            // Gender
-            // 
-            Gender.Location = new Point(167, 209);
-            Gender.Name = "Gender";
-            Gender.Size = new Size(175, 23);
-            Gender.TabIndex = 3;
             // 
             // GenderLab
             // 
             GenderLab.AutoSize = true;
             GenderLab.Font = new Font("Segoe UI Emoji", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            GenderLab.Location = new Point(76, 211);
+            GenderLab.Location = new Point(77, 187);
             GenderLab.Name = "GenderLab";
             GenderLab.Size = new Size(61, 21);
             GenderLab.TabIndex = 6;
@@ -134,7 +130,7 @@
             // 
             // SendersEmail
             // 
-            SendersEmail.Location = new Point(167, 261);
+            SendersEmail.Location = new Point(168, 282);
             SendersEmail.Name = "SendersEmail";
             SendersEmail.Size = new Size(175, 23);
             SendersEmail.TabIndex = 4;
@@ -143,7 +139,7 @@
             // 
             SenderLab.AutoSize = true;
             SenderLab.Font = new Font("Segoe UI Emoji", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            SenderLab.Location = new Point(49, 263);
+            SenderLab.Location = new Point(50, 284);
             SenderLab.Name = "SenderLab";
             SenderLab.Size = new Size(108, 21);
             SenderLab.TabIndex = 9;
@@ -213,7 +209,7 @@
             // button1
             // 
             button1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            button1.Location = new Point(652, 12);
+            button1.Location = new Point(615, 12);
             button1.Name = "button1";
             button1.Size = new Size(136, 34);
             button1.TabIndex = 11;
@@ -223,7 +219,7 @@
             // 
             // MailSubject
             // 
-            MailSubject.Location = new Point(167, 304);
+            MailSubject.Location = new Point(168, 325);
             MailSubject.Name = "MailSubject";
             MailSubject.Size = new Size(175, 23);
             MailSubject.TabIndex = 5;
@@ -232,7 +228,7 @@
             // 
             MailSubjLab.AutoSize = true;
             MailSubjLab.Font = new Font("Segoe UI Emoji", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            MailSubjLab.Location = new Point(62, 306);
+            MailSubjLab.Location = new Point(63, 327);
             MailSubjLab.Name = "MailSubjLab";
             MailSubjLab.Size = new Size(95, 21);
             MailSubjLab.TabIndex = 19;
@@ -240,7 +236,7 @@
             // 
             // Company
             // 
-            Company.Location = new Point(167, 354);
+            Company.Location = new Point(168, 370);
             Company.Name = "Company";
             Company.Size = new Size(175, 23);
             Company.TabIndex = 6;
@@ -249,17 +245,61 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI Emoji", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(76, 354);
+            label4.Location = new Point(77, 370);
             label4.Name = "label4";
             label4.Size = new Size(77, 21);
             label4.TabIndex = 21;
             label4.Text = "Company";
             // 
+            // genderComboBox
+            // 
+            genderComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            genderComboBox.FormattingEnabled = true;
+            genderComboBox.Location = new Point(168, 189);
+            genderComboBox.Name = "genderComboBox";
+            genderComboBox.Size = new Size(175, 23);
+            genderComboBox.TabIndex = 22;
+            genderComboBox.SelectedIndexChanged += genderComboBox_SelectedIndexChanged;
+            // 
+            // templateComboBox
+            // 
+            templateComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            templateComboBox.FormattingEnabled = true;
+            templateComboBox.Location = new Point(168, 234);
+            templateComboBox.Name = "templateComboBox";
+            templateComboBox.Size = new Size(175, 23);
+            templateComboBox.TabIndex = 24;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI Emoji", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label5.Location = new Point(67, 232);
+            label5.Name = "label5";
+            label5.Size = new Size(81, 21);
+            label5.TabIndex = 23;
+            label5.Text = "Templates";
+            // 
+            // button2
+            // 
+            button2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            button2.Location = new Point(10, 7);
+            button2.Name = "button2";
+            button2.Size = new Size(137, 39);
+            button2.TabIndex = 25;
+            button2.Text = "Resfresh";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
             // ManualSend
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(800, 454);
+            Controls.Add(button2);
+            Controls.Add(templateComboBox);
+            Controls.Add(label5);
+            Controls.Add(genderComboBox);
             Controls.Add(Company);
             Controls.Add(label4);
             Controls.Add(MailSubject);
@@ -275,7 +315,6 @@
             Controls.Add(SendersEmail);
             Controls.Add(SenderLab);
             Controls.Add(SendBtn);
-            Controls.Add(Gender);
             Controls.Add(GenderLab);
             Controls.Add(ResiverEmail);
             Controls.Add(ResiverLastName);
@@ -298,7 +337,6 @@
         private TextBox ResiverName;
         private TextBox ResiverLastName;
         private TextBox ResiverEmail;
-        private TextBox Gender;
         private Label GenderLab;
         private Button SendBtn;
         private TextBox SendersEmail;
@@ -315,5 +353,9 @@
         private Label MailSubjLab;
         private TextBox Company;
         private Label label4;
+        private ComboBox genderComboBox;
+        private ComboBox templateComboBox;
+        private Label label5;
+        private Button button2;
     }
 }
