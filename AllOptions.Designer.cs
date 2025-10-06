@@ -181,6 +181,7 @@
             Controls.Add(button1);
             Controls.Add(ServiceNameChange);
             Controls.Add(OptionsTab);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "AllOptions";
             Text = "Options";
             OptionsTab.ResumeLayout(false);

@@ -25,6 +25,7 @@ namespace ClientApplication
             OptionName = optionName;
             OptionValue = optionValue;
             Category = category;
+            this.MinimumSize = new Size(300, 500);
         }
 
 

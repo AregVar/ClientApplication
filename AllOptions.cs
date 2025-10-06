@@ -26,6 +26,7 @@ namespace ClientApplication
         public AllOptions()
         {
             InitializeComponent();
+            this.MaximizeBox = false;
             string pathConfig = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceName.txt");
             if (!File.Exists(pathConfig))
             {

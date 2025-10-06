@@ -18,6 +18,11 @@ namespace ClientApplication
         {
             InitializeComponent();
             TemplateBody.TextChanged += TemplateBody_TextChanged;
+            webView21.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            //TemplateBody.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            TemplateBody.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Bottom;
+            AddBtn.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+            this.MinimumSize = new Size(1200, 400);
         }
 
         private void AddBtn_Click(object sender, EventArgs e)

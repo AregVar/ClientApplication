@@ -51,6 +51,8 @@ namespace ClientApplication
             //TemplateBody.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             TemplateBody.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Bottom;
             UpdBtn.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+            this.MinimumSize = new Size(1200, 400);
+            
         }
 
         private async void UpdBtn_Click(object sender, EventArgs e)
