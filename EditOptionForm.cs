@@ -48,7 +48,7 @@ namespace ClientApplication
             {
                 var option = new Options { OptionName = this.OptName.Text, OptionValue = this.OptValue.Text, Category = this.OptCategory.Text };
                 var json = JsonSerializer.Serialize(option);
-                MessageBox.Show(json);
+                
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
                 var res = await _httpClient.PutAsync($"{(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceHost.txt"))).Trim()}/api/options", content);
