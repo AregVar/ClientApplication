@@ -7,11 +7,13 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Text;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using static ClientApplication.SMTPOptions;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace ClientApplication
@@ -24,19 +26,31 @@ namespace ClientApplication
         private string Body;
         private string TemplGender;
         private bool IsDefault;
-        public EditFrm(long id, string name, string body, string gedner, bool isdef)
+        public EditFrm(long id, string name, string body, string gender, bool isdef)
         {
             InitializeComponent();
             Name = name;
             Body = body;
             Id = id;
-            TemplGender = gedner;
+            genderComboBox.Items.Add(gender);
+            if (gender == "man")
+            {
+                genderComboBox.Items.Add("woman");
+            }
+            else
+            {
+                genderComboBox.Items.Add("man");
+            }
+            genderComboBox.SelectedIndex = 0;
+            TemplGender = genderComboBox.Text;
+            //TemplGender = gedner;
             IsDefault = isdef;
 
 
 
             TemplateBody.TextChanged += TemplateBody_TextChanged;
             this.Resize += TemplatesForm_Resize;
+            IsOnlyOneDef();
         }
 
         private void EditFrm_Load(object sender, EventArgs e)
@@ -45,21 +59,53 @@ namespace ClientApplication
             TemplateBody.Text = Body;
             TemplateId.Text = Id.ToString();
             TemplateId.ReadOnly = true;
-            Gender.Text = TemplGender;
+            //Gender.Text = TemplGender;
             IsDef.Checked = IsDefault;
             webView21.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             //TemplateBody.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             TemplateBody.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Bottom;
             UpdBtn.Anchor = AnchorStyles.Top | AnchorStyles.Left;
             this.MinimumSize = new Size(1200, 400);
-            
+
+        }
+
+        public async void IsOnlyOneDef()
+        {
+            var res = await _httpClient.GetAsync($"{(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceHost.txt"))).Trim()}/api/templates"); res.EnsureSuccessStatusCode();
+
+            var json = await res.Content.ReadAsStringAsync();
+
+            var templates = JsonSerializer.Deserialize<List<Template>>(json,
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+            int defCount = 0;
+            foreach (var template in templates)
+            {
+                if (template.IsDefault == true && template.Name != TemplateName.Text && template.Gender == genderComboBox.Text)
+                {
+                    //MessageBox.Show($"{template.Name} {template.IsDefault}");
+                    defCount++;
+                    break;
+                }
+            }
+            if (defCount == 0 && IsDef.Checked)
+            {
+                IsDef.Enabled = false;
+                genderComboBox.Enabled = false;
+            }
+            else
+            {
+                IsDef.Enabled = true;
+                genderComboBox.Enabled = true;
+            }
+
         }
 
         private async void UpdBtn_Click(object sender, EventArgs e)
         {
 
 
-            if (TemplateName.Text == Name && TemplateBody.Text == Body && Gender.Text == TemplGender && IsDef.Checked == IsDefault)
+            if (TemplateName.Text == Name && TemplateBody.Text == Body && genderComboBox.Text == TemplGender && IsDef.Checked == IsDefault)
             {
                 MessageBox.Show("No changes detected.");
                 return;
@@ -73,7 +119,7 @@ namespace ClientApplication
 
             try
             {
-                var template = new Template { Name = this.TemplateName.Text, Body = this.TemplateBody.Text, Gender = this.Gender.Text, IsDefault = IsDef.Checked };
+                var template = new Template { Name = this.TemplateName.Text, Body = this.TemplateBody.Text, Gender = this.genderComboBox.Text, IsDefault = IsDef.Checked };
                 var json = JsonSerializer.Serialize(template);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
@@ -82,13 +128,19 @@ namespace ClientApplication
 
                 Name = TemplateName.Text;
                 Body = TemplateBody.Text;
-                TemplGender = Gender.Text;
+                TemplGender = genderComboBox.Text;
                 IsDefault = IsDef.Checked;
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error during the deletion of the template: {ex.Message}");
             }
+            finally
+            {
+                Close();
+            }
+
+            
 
         }
         private class Template
@@ -128,8 +180,18 @@ namespace ClientApplication
             //{
             //    float newSize = TemplateBody.Font.Size + 1;
             //    TemplateBody.Font = new Font(TemplateBody.Font.FontFamily, newSize);
-            }
+        }
+
+        private void Gender_TextChanged(object sender, EventArgs e)
+        {
+            //IsOnlyOneDef();
+        }
+
+        private void genderComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            IsOnlyOneDef();
         }
     }
+}
 
 

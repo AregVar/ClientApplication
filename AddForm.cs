@@ -23,13 +23,15 @@ namespace ClientApplication
             TemplateBody.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Bottom;
             AddBtn.Anchor = AnchorStyles.Top | AnchorStyles.Left;
             this.MinimumSize = new Size(1200, 400);
+            genderComboBox.Items.Add("man");
+            genderComboBox.Items.Add("woman");
         }
 
         private void AddBtn_Click(object sender, EventArgs e)
         {
             string name = TemplateName.Text;
             string body = TemplateBody.Text;
-            string gender = Gender.Text;
+            string gender = genderComboBox.Text;
             bool IsDefault = this.IsDef.Checked;
 
             if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(body) || string.IsNullOrWhiteSpace(gender))

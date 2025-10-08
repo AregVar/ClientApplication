@@ -35,9 +35,9 @@
             label2 = new Label();
             webView21 = new Microsoft.Web.WebView2.WinForms.WebView2();
             label3 = new Label();
-            Gender = new TextBox();
             label4 = new Label();
             IsDef = new CheckBox();
+            genderComboBox = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)webView21).BeginInit();
             SuspendLayout();
             // 
@@ -105,13 +105,6 @@
             label3.TabIndex = 17;
             label3.Text = "Template gender";
             // 
-            // Gender
-            // 
-            Gender.Location = new Point(171, 114);
-            Gender.Name = "Gender";
-            Gender.Size = new Size(100, 23);
-            Gender.TabIndex = 16;
-            // 
             // label4
             // 
             label4.AutoSize = true;
@@ -130,15 +123,24 @@
             IsDef.TabIndex = 20;
             IsDef.UseVisualStyleBackColor = true;
             // 
+            // genderComboBox
+            // 
+            genderComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            genderComboBox.FormattingEnabled = true;
+            genderComboBox.Location = new Point(171, 114);
+            genderComboBox.Name = "genderComboBox";
+            genderComboBox.Size = new Size(95, 23);
+            genderComboBox.TabIndex = 25;
+            // 
             // AddTemplateFrm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1192, 450);
+            Controls.Add(genderComboBox);
             Controls.Add(IsDef);
             Controls.Add(label4);
             Controls.Add(label3);
-            Controls.Add(Gender);
             Controls.Add(webView21);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -161,8 +163,8 @@
         private Label label2;
         private Microsoft.Web.WebView2.WinForms.WebView2 webView21;
         private Label label3;
-        private TextBox Gender;
         private Label label4;
         private CheckBox IsDef;
+        private ComboBox genderComboBox;
     }
 }
