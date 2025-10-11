@@ -53,6 +53,7 @@ namespace ClientApplication
                 dataGridView1.AllowUserToAddRows = false;
                 dataGridView1.AllowUserToDeleteRows = false;
                 dataGridView1.ReadOnly = true;
+                genderComboBox.Items.Clear();
                 //genderComboBox.Items.Clear();
                 //genderComboBox.Items.Add("All");
                 foreach (var template in allTemplates)

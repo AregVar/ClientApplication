@@ -160,6 +160,9 @@ namespace ClientApplication
             //{
             //    input = Interaction.InputBox("Please enter your rest service name", "Rest Service Name", "");
             //}
+            if (string.IsNullOrEmpty(input))
+                input = (File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceName.txt"))).Trim();
+            
             File.WriteAllText(pathConfig, input.Trim());
             ServiceName = input.Trim();
             bool exists = ServiceController.GetServices().Any(s => s.ServiceName == ServiceName);

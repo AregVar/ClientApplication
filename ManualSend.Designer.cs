@@ -269,6 +269,7 @@
             templateComboBox.Name = "templateComboBox";
             templateComboBox.Size = new Size(175, 23);
             templateComboBox.TabIndex = 24;
+            templateComboBox.SelectedIndexChanged += templateComboBox_SelectedIndexChanged;
             // 
             // label5
             // 

@@ -85,7 +85,8 @@ namespace ClientApplication
                 }
                 else
                 {
-                    MessageBox.Show($"Error: {response.StatusCode}");
+                    var errorText = await response.Content.ReadAsStringAsync();
+                    MessageBox.Show($"Error: {response.StatusCode} \nText: {errorText}");
                 }
             }
             catch (Exception ex)
@@ -122,7 +123,7 @@ namespace ClientApplication
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             var response = await client.PostAsync($"{(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceHost.txt"))).Trim()}/api/gender", content);
             var gendersJson = await response.Content.ReadAsStringAsync();
-           
+
 
             var options = new JsonSerializerOptions
             {
@@ -131,6 +132,7 @@ namespace ClientApplication
             genderComboBox.Items.Clear();
             var genders = JsonSerializer.Deserialize<List<string>>(gendersJson, options);
             genderComboBox.Items.AddRange(genders.ToArray());
+            templateComboBox.Items.Clear();
         }
 
         private async void genderComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -145,8 +147,17 @@ namespace ClientApplication
             var response = await client.PostAsync($"{(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceHost.txt"))).Trim()}/api/gender/gettemplates", content);
             var templatesJson = await response.Content.ReadAsStringAsync();
             var templates = JsonSerializer.Deserialize<List<string>>(templatesJson);
+            foreach (var template in templates)
+            {
+                Debug.WriteLine(template);
+            }
             templateComboBox.Items.AddRange(templates.ToArray());
             templateComboBox.SelectedIndex = 0;
+        }
+
+        private void templateComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

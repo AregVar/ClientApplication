@@ -65,6 +65,7 @@ namespace ClientApplication
                 finally
                 {
                     client.Dispose();
+                    Close();
                 }
             }
         }
