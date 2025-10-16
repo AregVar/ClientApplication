@@ -8,14 +8,14 @@ namespace ClientApplication
 {
     public partial class ManualSend : Form
     {
-        DbSendEmail dbSendEmailForm;
+        //DbSendEmail dbSendEmailForm;
         //AddTemplateFrm opt;
         //Options optionsForm;
         //AllOptions optAll;
         public ManualSend()
         {
             InitializeComponent();
-            dbSendEmailForm = new DbSendEmail();
+            //dbSendEmailForm = new DbSendEmail();
             //opt = new AddTemplateFrm();
             //optionsForm = new Options();
         }

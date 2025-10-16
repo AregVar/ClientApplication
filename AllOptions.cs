@@ -6,10 +6,13 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http;
 using System.ServiceProcess;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static ClientApplication.SMTPOptions;
 
 namespace ClientApplication
 {
@@ -76,6 +79,8 @@ namespace ClientApplication
             tabPage2.Text = "Smtp Options";
             tabPage3.Text = "Service Options";
             tabPage4.Text = "Sending Preview";
+            tabPage5.Text = "Schedule";
+            
             optForm.TopLevel = false;
             optForm.FormBorderStyle = FormBorderStyle.None;
             optForm.Dock = DockStyle.Fill;
@@ -162,7 +167,7 @@ namespace ClientApplication
             //}
             if (string.IsNullOrEmpty(input))
                 input = (File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceName.txt"))).Trim();
-            
+
             File.WriteAllText(pathConfig, input.Trim());
             ServiceName = input.Trim();
             bool exists = ServiceController.GetServices().Any(s => s.ServiceName == ServiceName);
@@ -201,6 +206,79 @@ namespace ClientApplication
                 input = Interaction.InputBox("Please enter your rest service name. You can't let it be empty or space.", "Rest Service Host", $"{(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceHost.txt"))).Trim()}");
             }
             File.WriteAllText(pathConfig, input.Trim());
+        }
+
+        private async void ScheduleSave_Click(object sender, EventArgs e)
+        {
+            HttpClient _httpClient = new HttpClient();
+            if (string.IsNullOrWhiteSpace(Hour.Text) || string.IsNullOrWhiteSpace(Minute.Text) || string.IsNullOrWhiteSpace(Interval.Text))
+            {
+                MessageBox.Show("Please fill all the fields.");
+                return;
+            }
+            if (!int.TryParse(Hour.Text, out int result) || !int.TryParse(Minute.Text, out int result1) || !int.TryParse(Interval.Text, out int result2))
+            {
+                MessageBox.Show("Please enter valid data (int numbers only).");
+                return;
+            }
+            if(int.Parse(Interval.Text) < 10)
+            {
+                MessageBox.Show("IntervalSeconds must be at least 10 seconds for safety.");
+                return;
+            }
+
+            try
+            {
+                var schedule = new ScheduleDto { Hour = int.Parse(this.Hour.Text), Minute = int.Parse(this.Minute.Text), IntervalSeconds = int.Parse(this.Interval.Text) };
+                var json = JsonSerializer.Serialize(schedule);
+
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+
+                var res = await _httpClient.PostAsync($"{(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceHost.txt"))).Trim()}/api/schedule/update", content);
+                MessageBox.Show($"Update of the schedule successfull");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error during the editing of the schedule: {ex.Message}");
+            }
+
+        }
+
+        public class ScheduleDto
+        {
+            public int Hour { get; set; }
+            public int Minute { get; set; }
+            public int IntervalSeconds { get; set; }
+        }
+        private async void GetData()
+        {
+            try
+            {
+                HttpClient _httpClient = new HttpClient();
+                var res = await _httpClient.GetAsync($"{(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceHost.txt"))).Trim()}/api/schedule");
+                res.EnsureSuccessStatusCode();
+
+                var json = await res.Content.ReadAsStringAsync();
+
+                var schedule = JsonSerializer.Deserialize<ScheduleDto>(json,
+                    new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                Hour.Text = schedule.Hour.ToString();
+                Minute.Text = schedule.Minute.ToString();
+                Interval.Text = schedule.IntervalSeconds.ToString();
+                
+                
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error during the retrival of templates: {ex.Message}");
+            }
+        }
+
+        private void RefreshBtn_Click(object sender, EventArgs e)
+        {
+            GetData();
         }
     }
 }
