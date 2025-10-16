@@ -1,3 +1,4 @@
+using Microsoft.Web.WebView2.Core;
 using System.Diagnostics;
 using System.Text;
 using System.Text.Json;
@@ -73,6 +74,7 @@ namespace ClientApplication
         {
             //dbSendEmailForm = new DbSendEmail();
             //dbSendEmailForm.Show();
+            //http://localhost:7038
             using var client = new HttpClient();
             try
             {
@@ -86,12 +88,24 @@ namespace ClientApplication
                 else
                 {
                     var errorText = await response.Content.ReadAsStringAsync();
-                    MessageBox.Show($"Error: {response.StatusCode} \nText: {errorText}");
+                    //if ((int)response.StatusCode == 502)
+                    //{
+                    //    var res = MessageBox.Show($"An error occured: {errorText}\n Click Ok to go to templates page", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                    //    if (res == DialogResult.OK)
+                    //    {
+                    //        MessageBox.Show("");
+                    //    }
+                    //}
+                    //else
+                    //{
+                        MessageBox.Show($"An error occured: {errorText}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //}
+                    
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("An error occurred: " + ex.Message);
+                MessageBox.Show("Error: " + ex.Message);
             }
             finally
             {
