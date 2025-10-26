@@ -94,7 +94,7 @@
             UpdBtn.TabIndex = 15;
             UpdBtn.Text = "Update the option";
             UpdBtn.UseVisualStyleBackColor = true;
-            UpdBtn.Click += AddBtn_Click;
+            UpdBtn.Click += EditBtn_Click;
             // 
             // EditOptionForm
             // 

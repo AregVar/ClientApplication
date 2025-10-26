@@ -49,6 +49,8 @@
             label3 = new Label();
             ServiceNameChange = new Button();
             button1 = new Button();
+            OpenLocalDbBtn = new Button();
+            label6 = new Label();
             OptionsTab.SuspendLayout();
             tabPage3.SuspendLayout();
             tabPage5.SuspendLayout();
@@ -92,6 +94,8 @@
             // 
             // tabPage3
             // 
+            tabPage3.Controls.Add(label6);
+            tabPage3.Controls.Add(OpenLocalDbBtn);
             tabPage3.Controls.Add(label2);
             tabPage3.Controls.Add(label1);
             tabPage3.Controls.Add(StopBtn);
@@ -281,6 +285,26 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // OpenLocalDbBtn
+            // 
+            OpenLocalDbBtn.Location = new Point(29, 274);
+            OpenLocalDbBtn.Margin = new Padding(3, 4, 3, 4);
+            OpenLocalDbBtn.Name = "OpenLocalDbBtn";
+            OpenLocalDbBtn.Size = new Size(136, 44);
+            OpenLocalDbBtn.TabIndex = 9;
+            OpenLocalDbBtn.Text = "Open local db";
+            OpenLocalDbBtn.UseVisualStyleBackColor = true;
+            OpenLocalDbBtn.Click += OpenLocalDbBtn_Click;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(211, 286);
+            label6.Name = "label6";
+            label6.Size = new Size(162, 20);
+            label6.TabIndex = 10;
+            label6.Text = "Opens local options.db";
+            // 
             // AllOptions
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -324,5 +348,7 @@
         private Label label4;
         private Label label3;
         private Button RefreshBtn;
+        private Button OpenLocalDbBtn;
+        private Label label6;
     }
 }

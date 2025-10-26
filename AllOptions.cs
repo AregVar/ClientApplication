@@ -80,7 +80,7 @@ namespace ClientApplication
             tabPage3.Text = "Service Options";
             tabPage4.Text = "Sending Preview";
             tabPage5.Text = "Schedule";
-            
+
             optForm.TopLevel = false;
             optForm.FormBorderStyle = FormBorderStyle.None;
             optForm.Dock = DockStyle.Fill;
@@ -221,7 +221,7 @@ namespace ClientApplication
                 MessageBox.Show("Please enter valid data (int numbers only).");
                 return;
             }
-            if(int.Parse(Interval.Text) < 10)
+            if (int.Parse(Interval.Text) < 10)
             {
                 MessageBox.Show("IntervalSeconds must be at least 10 seconds for safety.");
                 return;
@@ -266,8 +266,8 @@ namespace ClientApplication
                 Hour.Text = schedule.Hour.ToString();
                 Minute.Text = schedule.Minute.ToString();
                 Interval.Text = schedule.IntervalSeconds.ToString();
-                
-                
+
+
 
             }
             catch (Exception ex)
@@ -279,6 +279,29 @@ namespace ClientApplication
         private void RefreshBtn_Click(object sender, EventArgs e)
         {
             GetData();
+        }
+
+        private void OpenLocalDbBtn_Click(object sender, EventArgs e)
+        {
+            using var dialog = new OpenFileDialog
+            {
+                Filter = "SQLite DB (*.db)|*.db",
+                Title = "Choose the local options.db"
+            };
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                var altWindow = new SMTPOptions(dialog.FileName);
+                try
+                {
+                    altWindow.ShowDialog();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+                
+            }
         }
     }
 }
