@@ -34,10 +34,6 @@ namespace ClientApplication
             if (!File.Exists(pathConfig))
             {
                 string input = Interaction.InputBox("Please enter your rest client service name", "Rest Service Name", $"RestClientService");
-                //while (string.IsNullOrWhiteSpace(input))
-                //{
-                //    input = Interaction.InputBox("Please enter your rest service name", "Rest Service Name", "");
-                //}
                 File.WriteAllText(pathConfig, input.Trim());
             }
             string pathConfig1 = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceHost.txt");
@@ -114,22 +110,6 @@ namespace ClientApplication
             StartBtn.Enabled = false;
         }
 
-        //public string GetRestClientName()
-        //{
-        //    string pathConfig = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.txt");
-        //    if (!File.Exists(pathConfig))
-        //    {
-        //        MessageBox.Show("file config.txt not found!");
-        //        return string.Empty;
-        //    }
-        //    string restClientPath = File.ReadAllText(pathConfig).Trim();
-        //    if (!File.Exists(restClientPath))
-        //    {
-        //        MessageBox.Show($"RestClientFinal не найден по пути: {restClientPath}");
-        //        return string.Empty;
-        //    }
-        //    return restClientPath;
-        //}
 
         private void ChangePath_Click(object sender, EventArgs e)
         {
@@ -161,10 +141,6 @@ namespace ClientApplication
         {
             string pathConfig = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceName.txt");
             string input = Interaction.InputBox("Please enter your rest client service name", "Rest Service Name", $"{(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceName.txt"))).Trim()}");
-            //while (string.IsNullOrWhiteSpace(input))
-            //{
-            //    input = Interaction.InputBox("Please enter your rest service name", "Rest Service Name", "");
-            //}
             if (string.IsNullOrEmpty(input))
                 input = (File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceName.txt"))).Trim();
 

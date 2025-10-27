@@ -26,6 +26,8 @@ namespace ClientApplication
         private string Body;
         private string TemplGender;
         private bool IsDefault;
+
+        private bool isView;
         public EditFrm(long id, string name, string body, string gender, bool isdef)
         {
             InitializeComponent();
@@ -45,12 +47,59 @@ namespace ClientApplication
             TemplGender = genderComboBox.Text;
             //TemplGender = gedner;
             IsDefault = isdef;
+            
 
 
 
             TemplateBody.TextChanged += TemplateBody_TextChanged;
             this.Resize += TemplatesForm_Resize;
             IsOnlyOneDef();
+        }
+
+        public EditFrm(bool isview, long id, string name, string body, string gender, bool isdef)
+        {
+            
+            InitializeComponent();
+            Name = name;
+            Body = body;
+            Id = id;
+            genderComboBox.Items.Add(gender);
+            if (gender == "man")
+            {
+                genderComboBox.Items.Add("woman");
+            }
+            else
+            {
+                genderComboBox.Items.Add("man");
+            }
+            genderComboBox.SelectedIndex = 0;
+            TemplGender = genderComboBox.Text;
+            //TemplGender = gedner;
+
+            IsDefault = isdef;
+
+            IsDef.Enabled = false;
+            label4.Visible = false;
+            label5.Visible = false;
+            IsDef.Visible = false;
+            TemplateName.ReadOnly = true;
+            genderComboBox.Enabled = false;
+            genderComboBox.Visible = false;
+            UpdBtn.Enabled = false;
+            UpdBtn.Visible = false;
+            TemplateBody.ReadOnly = true;
+
+            isView = isview;
+
+
+
+            TemplateBody.TextChanged += TemplateBody_TextChanged;
+            
+
+
+            //TemplateBody.TextChanged += TemplateBody_TextChanged;
+            //this.Resize += TemplatesForm_Resize;
+            //IsOnlyOneDef();
         }
 
         private void EditFrm_Load(object sender, EventArgs e)
@@ -66,7 +115,6 @@ namespace ClientApplication
             TemplateBody.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Bottom;
             UpdBtn.Anchor = AnchorStyles.Top | AnchorStyles.Left;
             this.MinimumSize = new Size(1200, 400);
-
         }
 
         public async void IsOnlyOneDef()

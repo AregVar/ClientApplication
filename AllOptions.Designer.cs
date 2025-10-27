@@ -32,11 +32,11 @@
             tabPage1 = new TabPage();
             tabPage2 = new TabPage();
             tabPage3 = new TabPage();
+            label6 = new Label();
+            OpenLocalDbBtn = new Button();
             label2 = new Label();
-            label1 = new Label();
             StopBtn = new Button();
             StartBtn = new Button();
-            ChangePath = new Button();
             tabPage4 = new TabPage();
             tabPage5 = new TabPage();
             RefreshBtn = new Button();
@@ -49,8 +49,6 @@
             label3 = new Label();
             ServiceNameChange = new Button();
             button1 = new Button();
-            OpenLocalDbBtn = new Button();
-            label6 = new Label();
             OptionsTab.SuspendLayout();
             tabPage3.SuspendLayout();
             tabPage5.SuspendLayout();
@@ -97,10 +95,8 @@
             tabPage3.Controls.Add(label6);
             tabPage3.Controls.Add(OpenLocalDbBtn);
             tabPage3.Controls.Add(label2);
-            tabPage3.Controls.Add(label1);
             tabPage3.Controls.Add(StopBtn);
             tabPage3.Controls.Add(StartBtn);
-            tabPage3.Controls.Add(ChangePath);
             tabPage3.Location = new Point(4, 29);
             tabPage3.Margin = new Padding(3, 4, 3, 4);
             tabPage3.Name = "tabPage3";
@@ -110,6 +106,26 @@
             tabPage3.Text = "tabPage3";
             tabPage3.UseVisualStyleBackColor = true;
             // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(211, 286);
+            label6.Name = "label6";
+            label6.Size = new Size(162, 20);
+            label6.TabIndex = 10;
+            label6.Text = "Opens local options.db";
+            // 
+            // OpenLocalDbBtn
+            // 
+            OpenLocalDbBtn.Location = new Point(29, 274);
+            OpenLocalDbBtn.Margin = new Padding(3, 4, 3, 4);
+            OpenLocalDbBtn.Name = "OpenLocalDbBtn";
+            OpenLocalDbBtn.Size = new Size(136, 44);
+            OpenLocalDbBtn.TabIndex = 9;
+            OpenLocalDbBtn.Text = "Open local db";
+            OpenLocalDbBtn.UseVisualStyleBackColor = true;
+            OpenLocalDbBtn.Click += OpenLocalDbBtn_Click;
+            // 
             // label2
             // 
             label2.AutoSize = true;
@@ -118,16 +134,6 @@
             label2.Size = new Size(198, 20);
             label2.TabIndex = 8;
             label2.Text = "Start/Stop RestClient Service";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(197, 55);
-            label1.Name = "label1";
-            label1.Size = new Size(271, 20);
-            label1.TabIndex = 7;
-            label1.Text = "Change or set path of RestClient service";
-            label1.Visible = false;
             // 
             // StopBtn
             // 
@@ -150,18 +156,6 @@
             StartBtn.Text = "Start service";
             StartBtn.UseVisualStyleBackColor = true;
             StartBtn.Click += StartBtn_Click;
-            // 
-            // ChangePath
-            // 
-            ChangePath.Location = new Point(29, 44);
-            ChangePath.Margin = new Padding(3, 4, 3, 4);
-            ChangePath.Name = "ChangePath";
-            ChangePath.Size = new Size(136, 44);
-            ChangePath.TabIndex = 4;
-            ChangePath.Text = "Change/Set path";
-            ChangePath.UseVisualStyleBackColor = true;
-            ChangePath.Visible = false;
-            ChangePath.Click += ChangePath_Click;
             // 
             // tabPage4
             // 
@@ -285,26 +279,6 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
-            // OpenLocalDbBtn
-            // 
-            OpenLocalDbBtn.Location = new Point(29, 274);
-            OpenLocalDbBtn.Margin = new Padding(3, 4, 3, 4);
-            OpenLocalDbBtn.Name = "OpenLocalDbBtn";
-            OpenLocalDbBtn.Size = new Size(136, 44);
-            OpenLocalDbBtn.TabIndex = 9;
-            OpenLocalDbBtn.Text = "Open local db";
-            OpenLocalDbBtn.UseVisualStyleBackColor = true;
-            OpenLocalDbBtn.Click += OpenLocalDbBtn_Click;
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(211, 286);
-            label6.Name = "label6";
-            label6.Size = new Size(162, 20);
-            label6.TabIndex = 10;
-            label6.Text = "Opens local options.db";
-            // 
             // AllOptions
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -331,11 +305,9 @@
         private TabPage tabPage1;
         private TabPage tabPage2;
         private TabPage tabPage3;
-        private Button ChangePath;
         private Button StartBtn;
         private Button StopBtn;
         private Label label2;
-        private Label label1;
         private TabPage tabPage4;
         private Button ServiceNameChange;
         private Button button1;

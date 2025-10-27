@@ -114,7 +114,7 @@ namespace ClientApplication
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error during the editing of the option: {ex.Message}");
+                MessageBox.Show($"Error during the editing of the option: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
