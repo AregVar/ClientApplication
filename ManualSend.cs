@@ -9,11 +9,11 @@ namespace ClientApplication
 {
     public partial class ManualSend : Form
     {
-        
+
         public ManualSend()
         {
             InitializeComponent();
-            
+
         }
 
         private async void SendBtn_Click(object sender, EventArgs e)
@@ -89,7 +89,7 @@ namespace ClientApplication
                 else
                 {
                     var errorText = await response.Content.ReadAsStringAsync();
-                    MessageBox.Show("Failed to send emails. Status code: " + response.StatusCode+", error: " +errorText, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Failed to send emails. Status code: " + response.StatusCode + ", error: " + errorText, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
@@ -104,7 +104,7 @@ namespace ClientApplication
 
         private async void button1_Click(object sender, EventArgs e)
         {
-            
+
             //http://localhost:7038
             using var client = new HttpClient();
             try
@@ -188,6 +188,11 @@ namespace ClientApplication
         }
 
         private void templateComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void GenderLab_Click(object sender, EventArgs e)
         {
 
         }

@@ -99,8 +99,33 @@ namespace ClientApplication
 
         private async void DeleteBtn_Click(object sender, EventArgs e)
         {
+
             if (dataGridView1.CurrentRow != null)
             {
+                var check = await _httpClient.GetAsync($"{(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceHost.txt"))).Trim()}/api/templates"); check.EnsureSuccessStatusCode();
+
+                var json = await check.Content.ReadAsStringAsync();
+
+                var templates = JsonSerializer.Deserialize<List<Template>>(json,
+                    new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                int defCount = 0;
+                foreach (var template in templates)
+                {
+                    if (template.IsDefault == true && template.Name != dataGridView1.CurrentRow.Cells["Name"].Value.ToString() && template.Gender == dataGridView1.CurrentRow.Cells["Gender"].Value.ToString())
+                    {
+                        //MessageBox.Show($"{template.Name} {template.IsDefault}");
+                        defCount++;
+                        break;
+                    }
+                }
+                if (defCount == 0 && Convert.ToBoolean(dataGridView1.CurrentRow.Cells["IsDefault"].Value))
+                {
+                    MessageBox.Show("You cannot delete the only default template");
+                    return;
+                }
+
+
                 var confirm = MessageBox.Show($"You are about to delete the template with ID: {dataGridView1.CurrentRow.Cells["Id"].Value}, are you sure?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (confirm == DialogResult.No)

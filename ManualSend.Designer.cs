@@ -60,31 +60,31 @@
             // 
             NameLeb.AutoSize = true;
             NameLeb.Font = new Font("Segoe UI Emoji", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            NameLeb.Location = new Point(77, 51);
+            NameLeb.Location = new Point(36, 55);
             NameLeb.Name = "NameLeb";
-            NameLeb.Size = new Size(52, 21);
+            NameLeb.Size = new Size(122, 21);
             NameLeb.TabIndex = 0;
-            NameLeb.Text = "Name";
+            NameLeb.Text = "Receivers Name";
             // 
             // LastNameLeb
             // 
             LastNameLeb.AutoSize = true;
             LastNameLeb.Font = new Font("Segoe UI Emoji", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            LastNameLeb.Location = new Point(62, 101);
+            LastNameLeb.Location = new Point(8, 104);
             LastNameLeb.Name = "LastNameLeb";
-            LastNameLeb.Size = new Size(84, 21);
+            LastNameLeb.Size = new Size(154, 21);
             LastNameLeb.TabIndex = 1;
-            LastNameLeb.Text = "Last Name";
+            LastNameLeb.Text = "Receivers Last Name";
             // 
             // ResiverLab
             // 
             ResiverLab.AutoSize = true;
             ResiverLab.Font = new Font("Segoe UI Emoji", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ResiverLab.Location = new Point(52, 151);
+            ResiverLab.Location = new Point(36, 151);
             ResiverLab.Name = "ResiverLab";
-            ResiverLab.Size = new Size(110, 21);
+            ResiverLab.Size = new Size(118, 21);
             ResiverLab.TabIndex = 2;
-            ResiverLab.Text = "Resivers Email";
+            ResiverLab.Text = "Receivers Email";
             // 
             // ResiverName
             // 
@@ -111,16 +111,17 @@
             // 
             GenderLab.AutoSize = true;
             GenderLab.Font = new Font("Segoe UI Emoji", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            GenderLab.Location = new Point(77, 187);
+            GenderLab.Location = new Point(77, 191);
             GenderLab.Name = "GenderLab";
             GenderLab.Size = new Size(61, 21);
             GenderLab.TabIndex = 6;
             GenderLab.Text = "Gender";
+            GenderLab.Click += GenderLab_Click;
             // 
             // SendBtn
             // 
             SendBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            SendBtn.Location = new Point(602, 354);
+            SendBtn.Location = new Point(614, 370);
             SendBtn.Name = "SendBtn";
             SendBtn.Size = new Size(137, 39);
             SendBtn.TabIndex = 10;
@@ -130,7 +131,7 @@
             // 
             // SendersEmail
             // 
-            SendersEmail.Location = new Point(168, 282);
+            SendersEmail.Location = new Point(576, 172);
             SendersEmail.Name = "SendersEmail";
             SendersEmail.Size = new Size(175, 23);
             SendersEmail.TabIndex = 4;
@@ -139,7 +140,7 @@
             // 
             SenderLab.AutoSize = true;
             SenderLab.Font = new Font("Segoe UI Emoji", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            SenderLab.Location = new Point(50, 284);
+            SenderLab.Location = new Point(458, 174);
             SenderLab.Name = "SenderLab";
             SenderLab.Size = new Size(108, 21);
             SenderLab.TabIndex = 9;
@@ -147,7 +148,7 @@
             // 
             // Host
             // 
-            Host.Location = new Point(576, 147);
+            Host.Location = new Point(576, 218);
             Host.Name = "Host";
             Host.Size = new Size(175, 23);
             Host.TabIndex = 7;
@@ -156,7 +157,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Emoji", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(483, 147);
+            label1.Location = new Point(483, 218);
             label1.Name = "label1";
             label1.Size = new Size(84, 21);
             label1.TabIndex = 11;
@@ -174,7 +175,7 @@
             // 
             // Port
             // 
-            Port.Location = new Point(576, 202);
+            Port.Location = new Point(576, 273);
             Port.Name = "Port";
             Port.Size = new Size(175, 23);
             Port.TabIndex = 8;
@@ -183,7 +184,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Emoji", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(483, 202);
+            label2.Location = new Point(483, 273);
             label2.Name = "label2";
             label2.Size = new Size(83, 21);
             label2.TabIndex = 14;
@@ -191,7 +192,7 @@
             // 
             // SenderPwd
             // 
-            SenderPwd.Location = new Point(576, 254);
+            SenderPwd.Location = new Point(576, 325);
             SenderPwd.Name = "SenderPwd";
             SenderPwd.Size = new Size(175, 23);
             SenderPwd.TabIndex = 9;
@@ -200,7 +201,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI Emoji", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(429, 256);
+            label3.Location = new Point(429, 327);
             label3.Name = "label3";
             label3.Size = new Size(137, 21);
             label3.TabIndex = 16;
@@ -219,7 +220,7 @@
             // 
             // MailSubject
             // 
-            MailSubject.Location = new Point(168, 325);
+            MailSubject.Location = new Point(168, 284);
             MailSubject.Name = "MailSubject";
             MailSubject.Size = new Size(175, 23);
             MailSubject.TabIndex = 5;
@@ -228,7 +229,7 @@
             // 
             MailSubjLab.AutoSize = true;
             MailSubjLab.Font = new Font("Segoe UI Emoji", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            MailSubjLab.Location = new Point(63, 327);
+            MailSubjLab.Location = new Point(63, 286);
             MailSubjLab.Name = "MailSubjLab";
             MailSubjLab.Size = new Size(95, 21);
             MailSubjLab.TabIndex = 19;
@@ -236,7 +237,7 @@
             // 
             // Company
             // 
-            Company.Location = new Point(168, 370);
+            Company.Location = new Point(168, 329);
             Company.Name = "Company";
             Company.Size = new Size(175, 23);
             Company.TabIndex = 6;
@@ -245,7 +246,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI Emoji", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(77, 370);
+            label4.Location = new Point(77, 329);
             label4.Name = "label4";
             label4.Size = new Size(77, 21);
             label4.TabIndex = 21;
@@ -275,7 +276,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI Emoji", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.Location = new Point(67, 232);
+            label5.Location = new Point(66, 236);
             label5.Name = "label5";
             label5.Size = new Size(81, 21);
             label5.TabIndex = 23;
