@@ -1,6 +1,6 @@
 ﻿namespace ClientApplication
 {
-    partial class EditFrm
+    partial class EditTemplateForm
     {
         /// <summary>
         /// Required designer variable.

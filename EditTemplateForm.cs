@@ -18,7 +18,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace ClientApplication
 {
-    public partial class EditFrm : Form
+    public partial class EditTemplateForm : Form
     {
         private readonly HttpClient _httpClient = new HttpClient();
         private long Id;
@@ -28,7 +28,7 @@ namespace ClientApplication
         private bool IsDefault;
 
         private bool isView;
-        public EditFrm(long id, string name, string body, string gender, bool isdef)
+        public EditTemplateForm(long id, string name, string body, string gender, bool isdef)
         {
             InitializeComponent();
             Name = name;
@@ -56,7 +56,7 @@ namespace ClientApplication
             IsOnlyOneDef();
         }
 
-        public EditFrm(bool isview, long id, string name, string body, string gender, bool isdef)
+        public EditTemplateForm(bool isview, long id, string name, string body, string gender, bool isdef)
         {
             
             InitializeComponent();

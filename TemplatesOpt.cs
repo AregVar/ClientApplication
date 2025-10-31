@@ -20,7 +20,7 @@ namespace ClientApplication
     public partial class TemplateOptions : Form
     {
         AddTemplateFrm addTemplateForm = new AddTemplateFrm();
-        EditFrm editForm;
+        EditTemplateForm editForm;
         private readonly HttpClient _httpClient = new HttpClient();
         private List<Template>? allTemplates = new List<Template>();
         public TemplateOptions()
@@ -164,7 +164,7 @@ namespace ClientApplication
             string body = dataGridView1.CurrentRow.Cells["Body"].Value.ToString();
             string gender = dataGridView1.CurrentRow.Cells["Gender"].Value.ToString();
             bool isdef = Convert.ToBoolean(dataGridView1.CurrentRow.Cells["IsDefault"].Value);
-            editForm = new EditFrm(id, name, body, gender, isdef);
+            editForm = new EditTemplateForm(id, name, body, gender, isdef);
             editForm.ShowDialog();
             GetData();
 
@@ -207,7 +207,7 @@ namespace ClientApplication
             string body = dataGridView1.CurrentRow.Cells["Body"].Value.ToString();
             string gender = dataGridView1.CurrentRow.Cells["Gender"].Value.ToString();
             bool isdef = Convert.ToBoolean(dataGridView1.CurrentRow.Cells["IsDefault"].Value);
-            var editForm = new EditFrm(true, id, name, body, gender, isdef);
+            var editForm = new EditTemplateForm(true, id, name, body, gender, isdef);
             
             editForm.ShowDialog();
         }
