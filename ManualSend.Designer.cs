@@ -121,7 +121,7 @@
             // SendBtn
             // 
             SendBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            SendBtn.Location = new Point(614, 370);
+            SendBtn.Location = new Point(614, 342);
             SendBtn.Name = "SendBtn";
             SendBtn.Size = new Size(137, 39);
             SendBtn.TabIndex = 10;
@@ -131,7 +131,7 @@
             // 
             // SendersEmail
             // 
-            SendersEmail.Location = new Point(576, 172);
+            SendersEmail.Location = new Point(576, 140);
             SendersEmail.Name = "SendersEmail";
             SendersEmail.Size = new Size(175, 23);
             SendersEmail.TabIndex = 4;
@@ -140,7 +140,7 @@
             // 
             SenderLab.AutoSize = true;
             SenderLab.Font = new Font("Segoe UI Emoji", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            SenderLab.Location = new Point(458, 174);
+            SenderLab.Location = new Point(458, 142);
             SenderLab.Name = "SenderLab";
             SenderLab.Size = new Size(108, 21);
             SenderLab.TabIndex = 9;
@@ -148,7 +148,7 @@
             // 
             // Host
             // 
-            Host.Location = new Point(576, 218);
+            Host.Location = new Point(576, 186);
             Host.Name = "Host";
             Host.Size = new Size(175, 23);
             Host.TabIndex = 7;
@@ -157,7 +157,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Emoji", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(483, 218);
+            label1.Location = new Point(483, 186);
             label1.Name = "label1";
             label1.Size = new Size(84, 21);
             label1.TabIndex = 11;
@@ -175,7 +175,7 @@
             // 
             // Port
             // 
-            Port.Location = new Point(576, 273);
+            Port.Location = new Point(576, 241);
             Port.Name = "Port";
             Port.Size = new Size(175, 23);
             Port.TabIndex = 8;
@@ -184,7 +184,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Emoji", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(483, 273);
+            label2.Location = new Point(483, 241);
             label2.Name = "label2";
             label2.Size = new Size(83, 21);
             label2.TabIndex = 14;
@@ -192,7 +192,7 @@
             // 
             // SenderPwd
             // 
-            SenderPwd.Location = new Point(576, 325);
+            SenderPwd.Location = new Point(576, 293);
             SenderPwd.Name = "SenderPwd";
             SenderPwd.Size = new Size(175, 23);
             SenderPwd.TabIndex = 9;
@@ -201,7 +201,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI Emoji", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(429, 327);
+            label3.Location = new Point(429, 295);
             label3.Name = "label3";
             label3.Size = new Size(137, 21);
             label3.TabIndex = 16;
