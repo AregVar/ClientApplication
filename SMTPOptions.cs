@@ -17,7 +17,6 @@ namespace ClientApplication
     {
         private readonly HttpClient _httpClient = new HttpClient();
         AllOptions allOptionsForm;
-        AddOptionForm addOptionForm;
         EditOptionForm editForm;
         string db_path;
         public SMTPOptions()

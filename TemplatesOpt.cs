@@ -21,7 +21,6 @@ namespace ClientApplication
     {
         AddTemplateFrm addTemplateForm = new AddTemplateFrm();
         EditFrm editForm;
-        Options optionsForm = new Options();
         private readonly HttpClient _httpClient = new HttpClient();
         private List<Template>? allTemplates = new List<Template>();
         public TemplateOptions()

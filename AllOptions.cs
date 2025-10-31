@@ -73,8 +73,8 @@ namespace ClientApplication
             OptionsTab.Width = this.Width - 50;
             tabPage1.Text = "Templates";
             tabPage2.Text = "Smtp Options";
-            tabPage3.Text = "Service Options";
-            tabPage4.Text = "Sending Preview";
+            tabPage3.Text = "Service Management";
+            tabPage4.Text = "Sending Test";
             tabPage5.Text = "Schedule";
 
             optForm.TopLevel = false;
