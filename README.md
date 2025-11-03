@@ -12,6 +12,16 @@ It serves as a companion tool for managing and interacting with the `RestClientS
 - **Templates Management** — add, delete, view or edit the emails body from `Templates` table of `options.db`.
 
 ## Installation
+
+## Requirements
+
+- Windows 10/11  
+- .NET 9.0 SDK  
+- Visual Studio 2022 (or newer)  
+- SQLite (included via System.Data.SQLite NuGet package)  
+- Edge WebView2 Runtime
+
+
 ### 1. Clone the repository
 ```bash
 git clone https://github.com/<your-username>/<repository-name>.git
@@ -46,13 +56,6 @@ Important: Run as Administrator.
 Or launch the compiled executable from:
 
 /bin/Release/netX.X/publish/
-
-### Additionally
-This program requires: 
-
-- windowsdesktop-runtime-9.0.9
-- MicrosoftEdgeWebView2Runtime
-- dotnet-runtime-9.0.9
 
 
 ## Usage guide
@@ -96,7 +99,7 @@ options.db/
 ├── Templates (Id integer | Name Text Not Null | Body Text Not Null | Gender Body Text Not Null | IsDefault Integer Not Null Check("IsDefault" in (0,1)) )
 ```
 
-## Typical Workflow 
+### Typical Workflow 
 1. Run the application as Administrator.
 2. Make sure options.db exists and contains a valid RestClientHost (e.g., http://localhost:7038).
 3. Set (if not already) a valid Service Name (not required, if connecting to the service from another computer) and Service Host to connect to the service.
@@ -105,10 +108,22 @@ options.db/
 5. If the host or port changes, restart service (if it is local) and change the Service Host in Client Application.
 6. By default, the schedule is 0 0 0, which means it wont work. After changing schedule make sure to restart the service for it to work. Note: interval in seconds can't be set less than 10 for safety measures.
    
-## Possible/common issues and solutions
+### Possible/common issues and solutions
 - Scheduler not running - Invalid hours or interval. Check values in Schedule table.
 - (Emergency db open) No updates applied after edit - Incorrect dbPath or file locked. Make sure to launch the programm as admin and verify the dbpath.
 - Service not responding - Invalid or busy port. Open local options.db and correct the RestClientHost and change the Service Host to the correct one.
+
+## Schema of work
+
+```bash
++--------------------------+         HTTP REQUESTS        +------------------------+
+|  Windows Service Manager | <--------------------------> |  RestClientService API |
+| (Client Application)     |                              | (Windows Service)      |
++-----------+--------------+                              +-----------+------------+
+            |                                                         |
+            |  SQLite read/write (options.db)                         |
+            +---------------------------------------------------------+
+```
 
 ## Author
 
