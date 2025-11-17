@@ -56,6 +56,12 @@ namespace ClientApplication
                 MessageBox.Show("No changes detected.");
                 return;
             }
+            
+            if (OptName.Text == "SMTPPort" && !int.TryParse(OptValue.Text, out int re1))
+            {
+                MessageBox.Show("The port can only be int");
+                return;
+            }
 
             var confirm = MessageBox.Show($"You are about to update the option: {OptionName}, are you sure?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (confirm == DialogResult.No)
@@ -87,6 +93,12 @@ namespace ClientApplication
             if (OptValue.Text == OptionValue && OptCategory.Text == Category)
             {
                 MessageBox.Show("No changes detected.");
+                return;
+            }
+
+            if (OptName.Text == "SMTPPort" && !int.TryParse(OptValue.Text, out int re2))
+            {
+                MessageBox.Show("The port can only be int");
                 return;
             }
 
