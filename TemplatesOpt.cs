@@ -53,8 +53,6 @@ namespace ClientApplication
                 dataGridView1.AllowUserToDeleteRows = false;
                 dataGridView1.ReadOnly = true;
                 genderComboBox.Items.Clear();
-                //genderComboBox.Items.Clear();
-                //genderComboBox.Items.Add("All");
                 foreach (var template in allTemplates)
                 {
                     if (!genderComboBox.Items.Contains("All"))
@@ -114,7 +112,7 @@ namespace ClientApplication
                 {
                     if (template.IsDefault == true && template.Name != dataGridView1.CurrentRow.Cells["Name"].Value.ToString() && template.Gender == dataGridView1.CurrentRow.Cells["Gender"].Value.ToString())
                     {
-                        //MessageBox.Show($"{template.Name} {template.IsDefault}");
+                       
                         defCount++;
                         break;
                     }

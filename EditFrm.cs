@@ -45,14 +45,12 @@ namespace ClientApplication
             }
             genderComboBox.SelectedIndex = 0;
             TemplGender = genderComboBox.Text;
-            //TemplGender = gedner;
             IsDefault = isdef;
             
 
 
 
             TemplateBody.TextChanged += TemplateBody_TextChanged;
-            this.Resize += TemplatesForm_Resize;
             IsOnlyOneDef();
         }
 
@@ -74,7 +72,7 @@ namespace ClientApplication
             }
             genderComboBox.SelectedIndex = 0;
             TemplGender = genderComboBox.Text;
-            //TemplGender = gedner;
+           
 
             IsDefault = isdef;
 
@@ -108,10 +106,10 @@ namespace ClientApplication
             TemplateBody.Text = Body;
             TemplateId.Text = Id.ToString();
             TemplateId.ReadOnly = true;
-            //Gender.Text = TemplGender;
+            
             IsDef.Checked = IsDefault;
             webView21.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            //TemplateBody.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            
             TemplateBody.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Bottom;
             UpdBtn.Anchor = AnchorStyles.Top | AnchorStyles.Left;
             this.MinimumSize = new Size(1200, 400);
@@ -131,7 +129,6 @@ namespace ClientApplication
             {
                 if (template.IsDefault == true && template.Name != TemplateName.Text && template.Gender == genderComboBox.Text)
                 {
-                    //MessageBox.Show($"{template.Name} {template.IsDefault}");
                     defCount++;
                     break;
                 }
@@ -199,40 +196,10 @@ namespace ClientApplication
             public bool IsDefault { get; set; }
         }
 
-        private void webView21_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private async void TemplateBody_TextChanged(object sender, EventArgs e)
         {
             await webView21.EnsureCoreWebView2Async();
             webView21.NavigateToString(TemplateBody.Text);
-        }
-
-        private void TemplatesForm_Resize(object sender, EventArgs e)
-        {
-            //webView21.Left = 10;
-            //webView21.Top = 10;
-            //webView21.Width = this.ClientSize.Width - 20;
-            //webView21.Height = this.ClientSize.Height / 2 - 20;
-
-            //// RichTextBox под webView2
-            //TemplateBody.Left = 10;
-            //TemplateBody.Top = webView21.Bottom + 10;
-            //TemplateBody.Width = this.ClientSize.Width - 20;
-            //TemplateBody.Height = this.ClientSize.Height - webView21.Height - 30;
-
-            //// Меняем размер шрифта (увеличиваем на 1)
-            //if (TemplateBody.Font.Size < 30) // ограничение, чтобы не рос бесконечно
-            //{
-            //    float newSize = TemplateBody.Font.Size + 1;
-            //    TemplateBody.Font = new Font(TemplateBody.Font.FontFamily, newSize);
-        }
-
-        private void Gender_TextChanged(object sender, EventArgs e)
-        {
-            //IsOnlyOneDef();
         }
 
         private void genderComboBox_SelectedIndexChanged(object sender, EventArgs e)

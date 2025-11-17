@@ -112,7 +112,7 @@
             webView21.Size = new Size(449, 423);
             webView21.TabIndex = 14;
             webView21.ZoomFactor = 1D;
-            webView21.Click += webView21_Click;
+            
             // 
             // label4
             // 
