@@ -109,7 +109,7 @@
             Controls.Add(OptName);
             Controls.Add(UpdBtn);
             Name = "EditOptionForm";
-            Text = "EditOptionForm";
+            Text = "Edit Option";
             Load += EditOptionForm_Load;
             ResumeLayout(false);
             PerformLayout();
