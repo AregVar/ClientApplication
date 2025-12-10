@@ -55,7 +55,7 @@ namespace ClientApplication
 
                     var response = client.PostAsync($"{(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceHost.txt"))).Trim()}/api/templates", content).Result;
                     //EmailSend.TemplateAdd(name, body);
-                    MessageBox.Show("Template added/updated successfully.");
+                    MessageBox.Show("Template added successfully.");
                 }
                 catch (Exception ex)
                 {
