@@ -132,6 +132,7 @@ namespace ClientApplication
             editForm = new EditOptionForm(name, value, category);
             editForm.ShowDialog();
             GetData();
+            editForm.Close();
         }
 
         private void EditAltBtn_Click(object sender, EventArgs e)

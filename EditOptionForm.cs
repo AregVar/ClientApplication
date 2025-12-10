@@ -86,6 +86,7 @@ namespace ClientApplication
             {
                 MessageBox.Show($"Error during the editing of the option: {ex.Message}");
             }
+            Close();
         }
 
         private async void EditAltBtn_Click(object sender, EventArgs e)
