@@ -58,6 +58,7 @@ namespace ClientApplication
         {
             
             InitializeComponent();
+            Text = "View Template";
             Name = name;
             Body = body;
             Id = id;
