@@ -60,7 +60,7 @@ namespace ClientApplication
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error during the retrival of templates: {ex.Message}");
+                MessageBox.Show($"Error during the retrival of templates: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -112,7 +112,7 @@ namespace ClientApplication
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -122,7 +122,7 @@ namespace ClientApplication
         {
             if (dataGridView1.CurrentRow == null)
             {
-                MessageBox.Show("No row is selected");
+                MessageBox.Show("No row is selected", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -139,7 +139,7 @@ namespace ClientApplication
         {
             if (dataGridView1.CurrentRow == null)
             {
-                MessageBox.Show("No row is selected");
+                MessageBox.Show("No row is selected", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 

@@ -67,7 +67,7 @@ namespace ClientApplication
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error during the retrival of templates: {ex.Message}");
+                MessageBox.Show($"Error during the retrival of templates: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -119,7 +119,7 @@ namespace ClientApplication
                 }
                 if (defCount == 0 && Convert.ToBoolean(dataGridView1.CurrentRow.Cells["IsDefault"].Value))
                 {
-                    MessageBox.Show("You cannot delete the only default template");
+                    MessageBox.Show("You cannot delete the only default template", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
@@ -135,17 +135,17 @@ namespace ClientApplication
                 {
                     var res = await _httpClient.DeleteAsync($"{(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceHost.txt"))).Trim()}/api/templates/{dataGridView1.CurrentRow.Cells["Id"].Value}");
                     GetData();
-                    MessageBox.Show($"Deletion of the template successfull");
+                    MessageBox.Show($"Deletion of the template successfull", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Error during the deletion of the template: {ex.Message}");
+                    MessageBox.Show($"Error during the deletion of the template: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
             }
             else
             {
-                MessageBox.Show("No row is selected");
+                MessageBox.Show("No row is selected", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
         }
@@ -154,7 +154,7 @@ namespace ClientApplication
         {
             if (dataGridView1.CurrentRow == null)
             {
-                MessageBox.Show("No row is selected");
+                MessageBox.Show("No row is selected", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             long id = Convert.ToInt64(dataGridView1.CurrentRow.Cells["Id"].Value);

@@ -153,7 +153,7 @@ namespace ClientApplication
 
             if (TemplateName.Text == Name && TemplateBody.Text == Body && genderComboBox.Text == TemplGender && IsDef.Checked == IsDefault)
             {
-                MessageBox.Show("No changes detected.");
+                MessageBox.Show("No changes detected.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -170,7 +170,7 @@ namespace ClientApplication
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
                 var res = await _httpClient.PutAsync($"{(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceHost.txt"))).Trim()}/api/templates/{Id}", content);
-                MessageBox.Show($"Update of the template successfull");
+                MessageBox.Show($"Update of the template successfull", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 Name = TemplateName.Text;
                 Body = TemplateBody.Text;
@@ -179,7 +179,7 @@ namespace ClientApplication
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error during the deletion of the template: {ex.Message}");
+                MessageBox.Show($"Error during the deletion of the template: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {

@@ -41,10 +41,8 @@
             tabPage5 = new TabPage();
             RefreshBtn = new Button();
             ScheduleSave = new Button();
-            Interval = new TextBox();
             Minute = new TextBox();
             Hour = new TextBox();
-            label5 = new Label();
             label4 = new Label();
             label3 = new Label();
             ServiceNameChange = new Button();
@@ -71,7 +69,7 @@
             // 
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(3, 3, 3, 3);
+            tabPage1.Padding = new Padding(3);
             tabPage1.Size = new Size(788, 398);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "tabPage1";
@@ -81,8 +79,8 @@
             // 
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3, 3, 3, 3);
-            tabPage2.Size = new Size(538, 398);
+            tabPage2.Padding = new Padding(3);
+            tabPage2.Size = new Size(788, 398);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "tabPage2";
             tabPage2.UseVisualStyleBackColor = true;
@@ -96,8 +94,8 @@
             tabPage3.Controls.Add(StartBtn);
             tabPage3.Location = new Point(4, 24);
             tabPage3.Name = "tabPage3";
-            tabPage3.Padding = new Padding(3, 3, 3, 3);
-            tabPage3.Size = new Size(538, 398);
+            tabPage3.Padding = new Padding(3);
+            tabPage3.Size = new Size(788, 398);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "tabPage3";
             tabPage3.UseVisualStyleBackColor = true;
@@ -154,8 +152,8 @@
             // 
             tabPage4.Location = new Point(4, 24);
             tabPage4.Name = "tabPage4";
-            tabPage4.Padding = new Padding(3, 3, 3, 3);
-            tabPage4.Size = new Size(538, 398);
+            tabPage4.Padding = new Padding(3);
+            tabPage4.Size = new Size(788, 398);
             tabPage4.TabIndex = 3;
             tabPage4.Text = "tabPage4";
             tabPage4.UseVisualStyleBackColor = true;
@@ -164,26 +162,24 @@
             // 
             tabPage5.Controls.Add(RefreshBtn);
             tabPage5.Controls.Add(ScheduleSave);
-            tabPage5.Controls.Add(Interval);
             tabPage5.Controls.Add(Minute);
             tabPage5.Controls.Add(Hour);
-            tabPage5.Controls.Add(label5);
             tabPage5.Controls.Add(label4);
             tabPage5.Controls.Add(label3);
             tabPage5.Location = new Point(4, 24);
             tabPage5.Margin = new Padding(3, 2, 3, 2);
             tabPage5.Name = "tabPage5";
             tabPage5.Padding = new Padding(3, 2, 3, 2);
-            tabPage5.Size = new Size(538, 398);
+            tabPage5.Size = new Size(788, 398);
             tabPage5.TabIndex = 4;
             tabPage5.Text = "tabPage5";
             tabPage5.UseVisualStyleBackColor = true;
             // 
             // RefreshBtn
             // 
-            RefreshBtn.Location = new Point(26, 170);
+            RefreshBtn.Location = new Point(26, 183);
             RefreshBtn.Name = "RefreshBtn";
-            RefreshBtn.Size = new Size(99, 41);
+            RefreshBtn.Size = new Size(112, 28);
             RefreshBtn.TabIndex = 12;
             RefreshBtn.Text = "Load Data";
             RefreshBtn.UseVisualStyleBackColor = true;
@@ -200,17 +196,9 @@
             ScheduleSave.UseVisualStyleBackColor = true;
             ScheduleSave.Click += ScheduleSave_Click;
             // 
-            // Interval
-            // 
-            Interval.Location = new Point(146, 116);
-            Interval.Margin = new Padding(3, 2, 3, 2);
-            Interval.Name = "Interval";
-            Interval.Size = new Size(110, 23);
-            Interval.TabIndex = 5;
-            // 
             // Minute
             // 
-            Minute.Location = new Point(146, 74);
+            Minute.Location = new Point(146, 111);
             Minute.Margin = new Padding(3, 2, 3, 2);
             Minute.Name = "Minute";
             Minute.Size = new Size(110, 23);
@@ -218,25 +206,16 @@
             // 
             // Hour
             // 
-            Hour.Location = new Point(146, 32);
+            Hour.Location = new Point(146, 69);
             Hour.Margin = new Padding(3, 2, 3, 2);
             Hour.Name = "Hour";
             Hour.Size = new Size(110, 23);
             Hour.TabIndex = 3;
             // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(26, 116);
-            label5.Name = "label5";
-            label5.Size = new Size(105, 15);
-            label5.TabIndex = 2;
-            label5.Text = "interval in seconds";
-            // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(26, 76);
+            label4.Location = new Point(26, 113);
             label4.Name = "label4";
             label4.Size = new Size(103, 15);
             label4.TabIndex = 1;
@@ -245,7 +224,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(26, 34);
+            label3.Location = new Point(26, 71);
             label3.Name = "label3";
             label3.Size = new Size(92, 15);
             label3.TabIndex = 0;
@@ -306,10 +285,8 @@
         private Button button1;
         private TabPage tabPage5;
         private Button ScheduleSave;
-        private TextBox Interval;
         private TextBox Minute;
         private TextBox Hour;
-        private Label label5;
         private Label label4;
         private Label label3;
         private Button RefreshBtn;

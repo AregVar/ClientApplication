@@ -99,78 +99,109 @@ namespace ClientApplication
 
         private void StartBtn_Click(object sender, EventArgs e)
         {
-            ServiceController sc = new ServiceController(ServiceName);
-
-            if (sc.Status == ServiceControllerStatus.Stopped)
+            try
             {
-                sc.Start();
-                sc.WaitForStatus(ServiceControllerStatus.Running, TimeSpan.FromSeconds(10));
+                ServiceController sc = new ServiceController(ServiceName);
+
+                if (sc.Status == ServiceControllerStatus.Stopped)
+                {
+                    sc.Start();
+                    sc.WaitForStatus(ServiceControllerStatus.Running, TimeSpan.FromSeconds(10));
+                }
+                StopBtn.Enabled = true;
+                StartBtn.Enabled = false;
+
             }
-            StopBtn.Enabled = true;
-            StartBtn.Enabled = false;
+            catch( Exception ex)
+            {
+                MessageBox.Show($"Error during the starting of the service: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+           
         }
 
 
         private void ChangePath_Click(object sender, EventArgs e)
         {
-            var path = string.Empty;
-            using var ofd = new OpenFileDialog { Filter = "Executable|*.exe" };
-            if (ofd.ShowDialog() == DialogResult.OK)
+            try
             {
-                path = ofd.FileName;
-                pathToExe = path;
-                File.WriteAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.txt"), pathToExe);
+                var path = string.Empty;
+                using var ofd = new OpenFileDialog { Filter = "Executable|*.exe" };
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    path = ofd.FileName;
+                    pathToExe = path;
+                    File.WriteAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.txt"), pathToExe);
+                }
             }
-
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error during the changing of the path: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void StopBtn_Click(object sender, EventArgs e)
         {
-            ServiceController sc = new ServiceController(ServiceName);
-
-            if (sc.Status == ServiceControllerStatus.Running)
+            try
             {
-                sc.Stop();
-                sc.WaitForStatus(ServiceControllerStatus.Stopped, TimeSpan.FromSeconds(10));
+                ServiceController sc = new ServiceController(ServiceName);
+
+                if (sc.Status == ServiceControllerStatus.Running)
+                {
+                    sc.Stop();
+                    sc.WaitForStatus(ServiceControllerStatus.Stopped, TimeSpan.FromSeconds(10));
+                }
+                StopBtn.Enabled = false;
+                StartBtn.Enabled = true;
             }
-            StopBtn.Enabled = false;
-            StartBtn.Enabled = true;
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error during the stopping of the service: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         private void ServiceNameChange_Click(object sender, EventArgs e)
         {
-            string pathConfig = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceName.txt");
-            string input = Interaction.InputBox("Please enter your rest client service name", "Rest Service Name", $"{(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceName.txt"))).Trim()}");
-            if (string.IsNullOrEmpty(input))
-                input = (File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceName.txt"))).Trim();
-
-            File.WriteAllText(pathConfig, input.Trim());
-            ServiceName = input.Trim();
-            bool exists = ServiceController.GetServices().Any(s => s.ServiceName == ServiceName);
-            if (!exists)
+            try
             {
-                OptionsTab.TabPages.Remove(tabPage3);
-            }
-            else
-            {
-                if (!OptionsTab.TabPages.Contains(tabPage3))
-                    OptionsTab.TabPages.Insert(2, tabPage3);
+                string pathConfig = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceName.txt");
+                string input = Interaction.InputBox("Please enter your rest client service name", "Rest Service Name", $"{(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceName.txt"))).Trim()}");
+                if (string.IsNullOrEmpty(input))
+                    input = (File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceName.txt"))).Trim();
 
-                ServiceController sc = new ServiceController(ServiceName);
-                if (sc.Status == ServiceControllerStatus.Stopped)
+                File.WriteAllText(pathConfig, input.Trim());
+                ServiceName = input.Trim();
+                bool exists = ServiceController.GetServices().Any(s => s.ServiceName == ServiceName);
+                if (!exists)
                 {
-                    StopBtn.Enabled = false;
-                    StartBtn.Enabled = true;
+                    OptionsTab.TabPages.Remove(tabPage3);
                 }
                 else
                 {
-                    StopBtn.Enabled = true;
-                    StartBtn.Enabled = false;
-                }
+                    if (!OptionsTab.TabPages.Contains(tabPage3))
+                        OptionsTab.TabPages.Insert(2, tabPage3);
 
+                    ServiceController sc = new ServiceController(ServiceName);
+                    if (sc.Status == ServiceControllerStatus.Stopped)
+                    {
+                        StopBtn.Enabled = false;
+                        StartBtn.Enabled = true;
+                    }
+                    else
+                    {
+                        StopBtn.Enabled = true;
+                        StartBtn.Enabled = false;
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error during the changing of the service name: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-        }
+
+         }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -187,36 +218,31 @@ namespace ClientApplication
         private async void ScheduleSave_Click(object sender, EventArgs e)
         {
             HttpClient _httpClient = new HttpClient();
-            if (string.IsNullOrWhiteSpace(Hour.Text) || string.IsNullOrWhiteSpace(Minute.Text) || string.IsNullOrWhiteSpace(Interval.Text))
+            if (string.IsNullOrWhiteSpace(Hour.Text) || string.IsNullOrWhiteSpace(Minute.Text))
             {
-                MessageBox.Show("Please fill all the fields.");
+                MessageBox.Show("Please fill all the fields.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if (!int.TryParse(Hour.Text, out int result) || !int.TryParse(Minute.Text, out int result1) || !int.TryParse(Interval.Text, out int result2))
+            if (!int.TryParse(Hour.Text, out int result) || !int.TryParse(Minute.Text, out int result1))
             {
-                MessageBox.Show("Please enter valid data (int numbers only).");
-                return;
-            }
-            if (int.Parse(Interval.Text) < 10)
-            {
-                MessageBox.Show("IntervalSeconds must be at least 10 seconds for safety.");
+                MessageBox.Show("Please enter valid data (int numbers only).", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             try
             {
-                var schedule = new ScheduleDto { Hour = int.Parse(this.Hour.Text), Minute = int.Parse(this.Minute.Text), IntervalSeconds = int.Parse(this.Interval.Text) };
+                var schedule = new ScheduleDto { Hour = int.Parse(this.Hour.Text), Minute = int.Parse(this.Minute.Text)};
                 var json = JsonSerializer.Serialize(schedule);
 
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
 
                 var res = await _httpClient.PostAsync($"{(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceHost.txt"))).Trim()}/api/schedule/update", content);
-                MessageBox.Show($"Update of the schedule successfull");
+                MessageBox.Show($"Update of the schedule successfull", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error during the editing of the schedule: {ex.Message}");
+                MessageBox.Show($"Error during the editing of the schedule: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
@@ -225,7 +251,6 @@ namespace ClientApplication
         {
             public int Hour { get; set; }
             public int Minute { get; set; }
-            public int IntervalSeconds { get; set; }
         }
         private async void GetData()
         {
@@ -241,14 +266,10 @@ namespace ClientApplication
                     new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
                 Hour.Text = schedule.Hour.ToString();
                 Minute.Text = schedule.Minute.ToString();
-                Interval.Text = schedule.IntervalSeconds.ToString();
-
-
-
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error during the retrival of templates: {ex.Message}");
+                MessageBox.Show($"Error during the retrival of templates: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -274,10 +295,12 @@ namespace ClientApplication
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error: " + ex.Message);
+                    MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                
+
             }
         }
+
+      
     }
 }

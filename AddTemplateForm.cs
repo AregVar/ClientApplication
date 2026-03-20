@@ -35,7 +35,7 @@ namespace ClientApplication
 
             if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(body) || string.IsNullOrWhiteSpace(gender))
             {
-                MessageBox.Show("Please enter template name, gender and body.");
+                MessageBox.Show("Please enter template name, gender and body.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
@@ -55,11 +55,11 @@ namespace ClientApplication
 
                     var response = client.PostAsync($"{(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceHost.txt"))).Trim()}/api/templates", content).Result;
                     //EmailSend.TemplateAdd(name, body);
-                    MessageBox.Show("Template added successfully.");
+                    MessageBox.Show("Template added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("An error occurred: " + ex.Message);
+                    MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 finally
                 {

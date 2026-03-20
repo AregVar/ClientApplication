@@ -53,13 +53,13 @@ namespace ClientApplication
         {
             if (OptValue.Text == OptionValue && OptCategory.Text == Category)
             {
-                MessageBox.Show("No changes detected.");
+                MessageBox.Show("No changes detected.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             
             if (OptName.Text == "SMTPPort" && !int.TryParse(OptValue.Text, out int re1))
             {
-                MessageBox.Show("The port can only be int");
+                MessageBox.Show("The port can only be int", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -77,14 +77,14 @@ namespace ClientApplication
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
                 var res = await _httpClient.PutAsync($"{(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceHost.txt"))).Trim()}/api/options", content);
-                MessageBox.Show($"Update of the option successfull");
+                MessageBox.Show($"Update of the option successfull", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 OptionValue = OptValue.Text;
                 Category = OptCategory.Text;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error during the editing of the option: {ex.Message}");
+                MessageBox.Show($"Error during the editing of the option: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             Close();
         }
@@ -93,13 +93,13 @@ namespace ClientApplication
         {
             if (OptValue.Text == OptionValue && OptCategory.Text == Category)
             {
-                MessageBox.Show("No changes detected.");
+                MessageBox.Show("No changes detected.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
             if (OptName.Text == "SMTPPort" && !int.TryParse(OptValue.Text, out int re2))
             {
-                MessageBox.Show("The port can only be int");
+                MessageBox.Show("The port can only be int", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -120,7 +120,7 @@ namespace ClientApplication
                 command.Parameters.AddWithValue("@category", OptCategory.Text);
                 command.ExecuteNonQuery();
 
-                MessageBox.Show($"Update of the option successfull");
+                MessageBox.Show($"Update of the option successfull", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 OptionValue = OptValue.Text;
                 Category = OptCategory.Text;

@@ -84,7 +84,7 @@ namespace ClientApplication
 
                 if (response.IsSuccessStatusCode)
                 {
-                    MessageBox.Show("Emails sent successfully. Status code: " + response.StatusCode);
+                    MessageBox.Show("Emails sent successfully. Status code: " + response.StatusCode, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
@@ -114,7 +114,7 @@ namespace ClientApplication
                 var response = await client.PostAsync($"{(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ServiceHost.txt"))).Trim()}/api/people", content);
                 if (response.IsSuccessStatusCode)
                 {
-                    MessageBox.Show("Request successful!");
+                    MessageBox.Show("Request successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
